@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/title_service_setting">
+
+        <EditTextPreference
+            android:key="address_connection"
+            android:defaultValue="10.0.0.210:8080"
+            android:title="@string/title_service_setting_address"
+            android:dialogTitle="@string/summary_service_setting_address" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_update_guides">
+
+        <Preference android:title="@string/title_update_guides_button"
+            android:key="@string/update_guides_button"
+            android:summary="@string/update_guides_button_help"/>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/title_my_calls">
+
+        <SwitchPreference
+            android:title="@string/title_my_calls_enable_update"
+            android:defaultValue="false"
+            android:key="@string/switch_state"
+            android:enabled="false"
+        />
+
+        <EditTextPreference
+            android:title="@string/title_my_calls_settings"
+            android:key="@string/timeout_for_update_guides"
+            android:dependency="switch_state"
+            android:defaultValue="10"
+            android:summary="@string/update_my_calls_timeout"
+            android:numeric="integer"
+            android:maxLength="3"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_param_enter">
+
+        <SwitchPreference
+            android:title="@string/title_switch_state_login"
+            android:defaultValue="false"
+            android:key="@string/switch_state_login"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/information_about_app">
+
+        <Preference android:title="@string/information_about_version"
+            android:key="@string/information_about_version"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

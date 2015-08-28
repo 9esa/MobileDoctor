@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frameLayoutForMesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_shadow_color"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayoutForEmptyMes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_shadow_color"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/not_enable_mes"
+            android:id="@+id/textView2"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title_mes"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollViewMesItem" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="@dimen/padding_right_or_left"
+            android:paddingRight="@dimen/padding_right_or_left">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pading_bottom_mes">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/open_date"
+                    android:id="@+id/text_view_open_date"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"
+                    />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/bt_add_date_open_mes"
+                    android:layout_weight="0.3"
+                    android:background="@color/question_background"
+                    android:text="@string/choose_date"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:enabled="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pading_bottom_mes">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/open_doctor"
+                    android:id="@+id/text_view_open_doctor"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/bt_add_doctor_open_mes"
+                    android:layout_weight="0.3"
+                    android:background="@color/question_background"
+                    android:text="@string/choose_doctor"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:enabled="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/code_mes"
+                    android:id="@+id/text_view_code_mes"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/bt_add_code_mes"
+                    android:layout_weight="0.3"
+                    android:background="@color/question_background"
+                    android:text="@string/choose_mes"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:enabled="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/name_of_mes"
+                    android:id="@+id/text_view_name_of_mes"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/view_name_of_mes"
+                    android:layout_weight="0.3"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_horizontal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pading_bottom_mes">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/date_close"
+                    android:id="@+id/text_view_date_close"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/bt_add_date_close_mes"
+                    android:layout_weight="0.3"
+                    android:background="@color/question_background"
+                    android:text="@string/choose_date"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:enabled="true"
+                    android:layout_marginBottom="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/closed_doctor"
+                    android:id="@+id/text_view_closed_doctor"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/bt_add_doctor_close_mes"
+                    android:layout_weight="0.3"
+                    android:background="@color/question_background"
+                    android:text="@string/choose_doctor"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:enabled="true"
+                    android:layout_marginBottom="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pading_bottom_mes">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/type_of_closed"
+                    android:id="@+id/text_view_type_of_closed"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/bt_add_type_closes_mes"
+                    android:layout_weight="0.3"
+                    android:background="@color/question_background"
+                    android:singleLine="false"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:text="@string/choose_type_closed"
+                    android:enabled="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pading_bottom_mes">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/comments"
+                    android:id="@+id/text_view_comments"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:gravity="center_vertical"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/edite_text_comments"
+                    android:layout_weight="0.3"
+                    android:background="#a3f7ffe7"
+                    android:textSize="@dimen/text_size_of_mes"
+                    android:autoText="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:paddingTop="15dp"
+                android:layout_gravity="bottom|right" >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_save_button"
+                    android:paddingRight="@dimen/padding_save_button"
+                    android:text="@string/save_button"
+                    android:id="@+id/btnSaveMes"
+                    android:background="@drawable/logout_btn_selector"
+                    android:textColor="#fffbfbfb" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

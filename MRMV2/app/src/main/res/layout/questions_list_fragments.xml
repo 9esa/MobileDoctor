@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frame_layout_for_progress_bar_question"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_shadow_color"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="right"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9">
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:text="Добавить"
+                android:id="@+id/btnCreate"
+                android:textColor="#fffbfbfb"
+                android:enabled="true"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_menu_btn_add" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1">
+
+            <mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.widget.TagCloudLinkView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/tags_of_protocols"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_tag"
+                android:background="#ffffff"
+                app:isDeletable="true"
+                app:tagLayoutColor="@color/app_main_color"
+                app:tagTextSize="@dimen/tag_size_buuton"
+                app:tagTextColor="#FFFFFF"
+                app:deletableTextSize="@dimen/delete_tag_button"
+                app:deletableTextColor="#ff9acd32"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_weight="0">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingRight="@dimen/padding_scroll_view_protocols"
+            android:paddingLeft="@dimen/padding_scroll_view_protocols">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="3dp"
+                android:background="#d0818384"></View>
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/paneToAddQuestion"
+                android:paddingTop="15dp">
+
+            </TableLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:paddingTop="15dp"
+                android:layout_gravity="right">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_save_button"
+                    android:paddingRight="@dimen/padding_save_button"
+                    android:text="@string/save_button"
+                    android:id="@+id/btnSaveProtocols"
+                    android:background="@drawable/logout_btn_selector"
+                    android:textColor="#fffbfbfb" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

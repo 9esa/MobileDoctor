@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+    // custom Headers
+    <LinearLayout
+        android:id="@+id/header_my_calls"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/calls_list_status_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.88"
+            android:gravity="center"
+            android:text="@string/calls_list_status_title"
+            android:background="@color/common_dark_overlay"
+            android:textColor="#FFFFFFFF" />
+
+        <TextView
+            android:id="@+id/calls_list_time_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.86"
+            android:gravity="center"
+            android:text="@string/calls_list_time_title"
+            android:background="@color/common_dark_overlay"
+            android:layout_marginLeft="@dimen/margin_header_emk"
+            android:textColor="#FFFFFFFF" />
+
+        <TextView
+            android:id="@+id/calls_list_patient_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.70"
+            android:gravity="center"
+            android:text="@string/calls_list_patient_title"
+            android:background="@color/common_dark_overlay"
+            android:layout_marginLeft="@dimen/margin_header_emk"
+            android:textColor="#FFFFFFFF" />
+
+        <TextView
+            android:id="@+id/calls_list_address_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.70"
+            android:gravity="center"
+            android:text="@string/calls_list_address_title"
+            android:background="@color/common_dark_overlay"
+            android:layout_marginLeft="@dimen/margin_header_emk"
+            android:textColor="#FFFFFFFF" />
+
+        <TextView
+            android:id="@+id/calls_list_complaints_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.7"
+            android:gravity="center"
+            android:text="@string/calls_list_complaints_title"
+            android:background="@color/common_dark_overlay"
+            android:layout_marginLeft="@dimen/margin_header_emk"
+            android:textColor="#FFFFFFFF" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_my_calls"
+        android:focusable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:longClickable="true">
+    </ListView>
+
+</RelativeLayout>

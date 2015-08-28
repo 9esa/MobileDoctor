@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="common_shadow_color">#40000000</color>
+    <color name="app_main_color">#009688</color>
+    <color name="login_background">#28a69a</color>
+    <color name="app_main_color_dark">#02655c</color>
+    <color name="error_hint_background">#02655c</color>
+    <color name="color_error_enter">#e80006</color>
+
+    <color name="color_for_lists">#ff0071e8</color>
+
+    <color name="login_background_input_form">#eeeeee</color>
+    <color name="spinner_background">#eeeeee</color>>
+    <color name="question_background">#eeeeee</color>>
+
+
+    <color name="common_dark_overlay">#2000</color>
+    <drawable name="common_dark_overlay_drawable">@color/common_dark_overlay</drawable>
+
+</resources>

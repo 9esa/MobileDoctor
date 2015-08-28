@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="message_you_are_not_able_to_use_app">Извините, приложение доступно только на планшетах</string>
+    <string name="message_you_need_to_input_login">Введите, пожалуйста, логин</string>
+    <string name="message_you_need_to_input_password">Введите, пожалуйста, пароль</string>
+    <string name="message_invalid_credentials">Неверный логин или пароль</string>
+    <string name="message_on_exit">Вы уверены, что хотите выйти?</string>
+    <string name="message_download_not_ready">Данные ещё не загружены, доступ не возможен</string>
+
+</resources>

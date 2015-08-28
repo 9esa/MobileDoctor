@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="short_sidebar_width">56dp</dimen>
+    <dimen name="sidebar_item_height">45dp</dimen>
+    <dimen name="open_drawer">250dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
+
+    <!--
+        Переменные для раздела стат талона, Амбулаторный талон
+    -->
+    <dimen name="outpatien_padding_top">20dp</dimen>
+    <dimen name="left_column_of_row_table_outpatien_padding_right">15dp</dimen>
+    <dimen name="title_of_spinner_outpatien_padding_bottom">5dp</dimen>
+    <dimen name="title_of_spinner_outpatien_padding_top">15dp</dimen>
+    <dimen name="delete_tag_button">10sp</dimen>
+    <dimen name="tag_size_buuton">8sp</dimen>
+    <dimen name="padding_tag">4dp</dimen>
+    <dimen name="padding_scroll_view_protocols">10dp</dimen>
+    <dimen name="padding_save_button">5dp</dimen>
+    <dimen name="padding_right_or_left">15dp</dimen>
+
+    <dimen name="text_size_of_mes">14sp</dimen>
+    <dimen name="pading_bottom_mes">5dp</dimen>
+
+    <dimen name="left_padding_edit_text">15dp</dimen>
+    <dimen name="all_margin_found_emk">10dp</dimen>
+    <dimen name="size_of_text_find_emk">14sp</dimen>
+    <dimen name="size_of_text_item_patient">17sp</dimen>
+    <dimen name="all_padding_item_patient">10dp</dimen>
+    <dimen name="margin_header_emk">1dp</dimen>
+
+</resources>

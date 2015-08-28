@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="mrmv.ariadna.reshenie.spb.ru.mrmv" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:requiresSmallestWidthDp="400"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:name=".application.MrmvApplication"
+        android:allowBackup="true"
+        android:description="@string/app_description"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <activity
+            android:name=".activites.LauncherActivity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Theme.LauncherActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleInstance"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".activites.HomeActivity"
+            android:label="Домашнее активити"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
+        <activity
+            android:name=".activites.AppPreferenceActivity"
+            android:label="Настройки приложения"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
+
+        <activity
+            android:name=".activites.MapActivity"
+            android:label="Карта моих вызовов"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
+
+        <service android:enabled="true" android:name=".services.ServiceLoading"/>
+        <service android:enabled="true" android:name=".services.ServiceSending"/>
+
+        <receiver android:name=".activites.oBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="mrmv.ariadna.reshenie.spb.ru.mrmv.activites.action_complite"/>
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

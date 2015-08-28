@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Характер заболевания"
+                    android:id="@+id/nature_of_disease"
+                    android:paddingBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_nature_of_disease"
+                    android:spinnerMode="dropdown"
+                    android:background="@color/spinner_background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Противоправные действия"
+                    android:id="@+id/illegal_actions"
+                    android:paddingBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_illegal_actions"
+                    android:spinnerMode="dropdown"
+                    android:background="@color/spinner_background" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingTop="20dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Травма"
+                    android:id="@+id/accident"
+                    android:paddingBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_accident"
+                    android:spinnerMode="dropdown"
+                    android:background="@color/spinner_background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.5"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Диспансерский учет"
+                        android:id="@+id/dispenser_account"
+                        android:paddingBottom="5dp" />
+
+                    <Spinner
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_dispenser_account"
+                        android:spinnerMode="dropdown"
+                        android:background="@color/spinner_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.5"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Причина снятия"
+                        android:id="@+id/reason_remove_dispenser_account"
+                        android:paddingBottom="5dp" />
+
+                    <Spinner
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner_reason_remove_dispenser_account"
+                        android:spinnerMode="dropdown"
+                        android:background="@color/spinner_background" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

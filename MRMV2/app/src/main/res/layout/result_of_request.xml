@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title_main_result_request"
+        android:id="@+id/title_result_of_request"
+        android:textColor="@color/app_main_color"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/cases"
+                    android:id="@+id/case_result_of_request"
+                    android:paddingBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_case_result_of_request"
+                    android:spinnerMode="dropdown"
+                    android:background="@color/spinner_background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/outcome"
+                    android:id="@+id/outcome_result_of_request"
+                    android:paddingBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_outcome_result_of_request"
+                    android:spinnerMode="dropdown"
+                    android:background="@color/spinner_background" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingTop="20dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/completeness"
+                    android:id="@+id/completeness_result_of_request"
+                    android:paddingBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_completeness_result_of_request"
+                    android:spinnerMode="dropdown"
+                    android:background="@color/spinner_background" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/result_of_health_care"
+                    android:id="@+id/result_healthcare_result_of_request"
+                    android:paddingBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_result_healthcare_result_of_request"
+                    android:spinnerMode="dropdown"
+                    android:background="@color/spinner_background" />
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

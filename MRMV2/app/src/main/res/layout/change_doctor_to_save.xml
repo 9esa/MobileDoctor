@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_vertical">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@color/login_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/choose_type_note"
+                android:id="@+id/tvChooseTypeNote"
+                android:layout_gravity="center_horizontal"
+                android:password="false"
+                android:layout_marginTop="@dimen/outpatien_padding_top"
+                android:textColor="#fffbfbfb" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="40dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/all_margin_found_emk">
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/current_doctor"
+                    android:id="@+id/btnCurrentDoctor"
+                    android:layout_weight="0.5"
+                    android:layout_marginRight="@dimen/padding_right_or_left"
+                    android:background="@drawable/shape"
+                    android:textColor="#fffbfbfb" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/another_doctor"
+                    android:id="@+id/btAnotherDoctor"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shape"
+                    android:textColor="#fffbfbfb" />
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+</RelativeLayout>

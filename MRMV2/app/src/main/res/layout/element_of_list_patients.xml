@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/all_padding_item_patient">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/number_of_card"
+        android:id="@+id/tvNumber"
+        android:layout_weight="0.2"
+        android:textSize="@dimen/size_of_text_item_patient" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/fio"
+        android:id="@+id/tvFIO"
+        android:layout_weight="0.2"
+        android:textSize="@dimen/size_of_text_item_patient" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/date_was_born"
+        android:id="@+id/tvDateBorn"
+        android:layout_weight="0.2"
+        android:textSize="@dimen/size_of_text_item_patient" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/number_phone_for_user"
+        android:id="@+id/tvUserPhone"
+        android:layout_weight="0.2"
+        android:textSize="@dimen/size_of_text_item_patient" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/address"
+        android:id="@+id/tvAddress"
+        android:layout_weight="0.2"
+        android:textSize="@dimen/size_of_text_item_patient" />
+
+</LinearLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_above="@id/home_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:measureWithLargestChild="false"
+        android:longClickable="false"
+        android:baselineAligned="false">
+
+
+        <mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.SlidingTabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/week_day"
+                android:layout_marginLeft="50dp"
+                android:layout_gravity="center"
+                android:text="2015-04-30"
+                android:textSize="14dp"
+                android:textColor="#51000000"
+                android:layout_weight="0.6"
+                android:gravity="left|center_vertical" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.7"
+                android:id="@+id/layout_opem_maps"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/open_maps"
+                    android:id="@+id/text_view_open_maps"
+                    android:layout_weight="0.3"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView2"
+                    android:src="@android:drawable/ic_menu_compass"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/textView4"
+                    android:layout_weight="0.4" />
+            </LinearLayout>
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="Обновить"
+                android:id="@+id/update_button"
+                android:layout_weight="0.8"
+                android:textSize="12dp"
+                android:background="#000071e8" />
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+
+
+            <!--<android.support.v4.view.PagerTabStrip-->
+                <!--android:id="@+id/pagerTabStrip"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="top">-->
+            <!--</android.support.v4.view.PagerTabStrip>-->
+        </android.support.v4.view.ViewPager>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/progress_bar_my_calls"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_shadow_color"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</RelativeLayout>

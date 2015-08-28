@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frame_layout_for_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_shadow_color"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title_main_diagnosis"
+        android:id="@+id/diagnosis_title"
+        android:textColor="@color/app_main_color"
+        android:textStyle="bold" />
+
+    <mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.widget.TagCloudLinkView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tags_of_diagnosis"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:background="#ffffff"
+        app:isDeletable="true"
+        app:tagLayoutColor="@color/app_main_color"
+        app:tagTextSize="10sp"
+        app:tagTextColor="#FFFFFF"
+        app:deletableTextSize="8sp"
+        app:deletableTextColor="#c1aa0001"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Задержка жидкости в организме, на лице, на ногах постоянно держатся отеки"
+        android:id="@+id/describe_diagnoses" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Какое-то страшное заболевание"
+        android:id="@+id/summary_diagnoses"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Тип диагноза:"
+            android:id="@+id/title_radio_buttons"
+            android:layout_weight="0.9" />
+
+        <RadioGroup
+            android:id="@+id/radio_group_diagnoses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.4">
+
+            <!--<RadioButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Основной"-->
+                <!--android:id="@+id/radio_button_main_diagnoses"-->
+                <!--android:checked="false"-->
+                <!--android:paddingRight="5dp" />-->
+
+            <!--<RadioButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Сопутствующий"-->
+                <!--android:id="@+id/radio_button_collateral_diagnoses"-->
+                <!--android:checked="false"-->
+                <!--android:paddingRight="5dp" />-->
+
+            <!--<RadioButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Осложнение"-->
+                <!--android:id="@+id/radio_button_complication_diagnoses"-->
+                <!--android:checked="false"-->
+                <!--android:paddingRight="5dp" />-->
+
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.9"
+            android:gravity="right">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Добавить"
+                android:id="@+id/button_add_diagnoses"
+                android:textColor="#fffbfbfb"
+                android:background="@drawable/logout_btn_selector" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/space_for_doctor_card"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        layout="@layout/bottom_of_stattalon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

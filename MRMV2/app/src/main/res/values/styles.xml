@@ -1,0 +1,52 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorPrimary">@color/app_main_color</item>
+        <item name="colorAccent">@color/app_main_color</item>
+        <item name="colorPrimaryDark">@color/app_main_color_dark</item>
+        <item name="windowActionBar">false</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="Theme.LauncherActivity" parent="@style/AppTheme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">#6FFF</item>
+    </style>
+
+    <style name="CommonListView">
+        <item name="android:dividerHeight">0px</item>
+        <item name="android:divider">@null</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:choiceMode">none</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:overScrollFooter">@null</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:footerDividersEnabled">true</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">@style/ButtonBar</item>
+        <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+
+    <!-- Backward-compatible version of ?android:attr/buttonBarStyle -->
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <!-- Backward-compatible version of ?android:attr/buttonBarButtonStyle -->
+    <style name="ButtonBarButton" />
+
+</resources>

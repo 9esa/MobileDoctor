@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/login_background">
+
+    <View
+        android:id="@+id/authentication_center_point"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <FrameLayout
+        android:id="@+id/authentication_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_shadow_color"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="#ffffffff"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:src="@drawable/doctor_circul"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:id="@+id/authentication_login"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_above="@id/authentication_center_point"
+                android:layout_toRightOf="@id/authentication_center_point"
+                android:gravity="center_vertical"
+                android:inputType="textAutoComplete"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/authentication_password"
+                android:background="@color/login_background_input_form"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/login" />
+
+            <EditText
+                android:id="@+id/authentication_password"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/authentication_center_point"
+                android:layout_toRightOf="@id/authentication_center_point"
+                android:gravity="center_vertical"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:background="@color/login_background_input_form"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:hint="@string/password" />
+
+            <Button
+                android:id="@+id/authentication_login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@string/enter"
+                android:layout_toLeftOf="@id/authentication_center_point"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#ffe4e4e4" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/ibtnSettings"
+        android:layout_below="@+id/authentication_progress_bar"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/onebit"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:onClick="openSetting"/>
+
+</RelativeLayout>

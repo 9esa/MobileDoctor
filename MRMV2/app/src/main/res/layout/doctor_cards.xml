@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frame_for_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_shadow_color"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header_of_stattalon"
+        android:id="@+id/include"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scroll_list_view"
+        android:layout_below="@+id/include">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_right_or_left"
+            android:paddingRight="@dimen/padding_right_or_left">
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/outpatient_talon" />
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/result_of_request" />
+
+            <FrameLayout
+                android:id="@+id/space_for_doctor_cards"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingTop="15dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_button"
+                    android:paddingRight="@dimen/padding_save_button"
+                    android:paddingLeft="@dimen/padding_save_button"
+                    android:id="@+id/button_save_visit"
+                    android:background="@drawable/logout_btn_selector"
+                    android:textColor="#fffbfbfb" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
