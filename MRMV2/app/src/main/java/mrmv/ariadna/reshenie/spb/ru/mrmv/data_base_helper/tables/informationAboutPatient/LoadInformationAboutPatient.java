@@ -88,13 +88,13 @@ public class LoadInformationAboutPatient extends CommonMainLoading implements IC
     public void saveLoadedItemToDB(ArrayList<JSONObject> dataAboutLoadedObjects, Object identificatieNummer) {
 
         String sId = "", sName = "", sSecondName = "",
-                sThirdName = "", sNumberCard = "", sPhone = "", sAddress =  "";
+                sThirdName = "", sNumberCard = "", sPhone = "", sAddress =  "", sBirthDate = "";
 
         if (dataAboutLoadedObjects != null) {
 
             Patients.removeAllInfornationAboutTables(oDataBaseHelper);
 
-            String sql = "INSERT INTO " + Patients.TABLE_NAME + " VALUES (NULL,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO " + Patients.TABLE_NAME + " VALUES (NULL,?,?,?,?,?,?,?,?);";
             SQLiteStatement statement = oDataBaseHelper.getWritableDatabase().compileStatement(sql);
             oDataBaseHelper.getWritableDatabase().beginTransaction();
 
@@ -106,9 +106,10 @@ public class LoadInformationAboutPatient extends CommonMainLoading implements IC
                     sName = String.valueOf(oItemGuides.get(Patients.PATIENT_NAME));
                     sSecondName = String.valueOf(oItemGuides.get(Patients.PATIENT_SECONDNAME));
                     sThirdName = String.valueOf(oItemGuides.get(Patients.PATIENT_THIRD_NAME));
-                    //sNumberCard = String.valueOf(oItemGuides.get(Patients.NUMBER_CARD));
+                    sNumberCard = String.valueOf(oItemGuides.get(Patients.NUMBER_CARD));
                     sPhone = String.valueOf(oItemGuides.get(Patients.PHONE));
                     sAddress = String.valueOf(oItemGuides.get(Patients.ADDRESS));
+                    sBirthDate = String.valueOf(oItemGuides.get(Patients.BIRTHDATE));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -116,13 +117,14 @@ public class LoadInformationAboutPatient extends CommonMainLoading implements IC
 
                 statement.clearBindings();
 
-                statement.bindString(1,sId);
+                statement.bindString(1, sId);
                 statement.bindString(2,sName);
                 statement.bindString(3,sSecondName);
                 statement.bindString(4,sThirdName);
                 statement.bindString(5,sNumberCard);
                 statement.bindString(6,sPhone);
                 statement.bindString(7,sAddress);
+                statement.bindString(8,sBirthDate);
 
                 statement.execute();
 

@@ -48,7 +48,7 @@
             android:name=".activites.HomeActivity"
             android:label="Домашнее активити"
             android:launchMode="singleInstance"
-            android:windowSoftInputMode="stateHidden"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="sensorLandscape">
         </activity>
 

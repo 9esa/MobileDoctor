@@ -29,7 +29,7 @@ public class DoctorAdapter  extends CursorAdapter {
 
         menuHolder.tvCode = (TextView) oCurrentView.findViewById(R.id.text_View_code_doctor_on_dep);
         menuHolder.tvFIO = (TextView) oCurrentView.findViewById(R.id.text_View_fio_doctor);
-//        menuHolder.nameOfSpeciality = (TextView) oCurrentView.findViewById(R.id.text_View_name_of_speciality);
+        menuHolder.nameOfSpeciality = (TextView) oCurrentView.findViewById(R.id.text_View_special_doctor);
 //        menuHolder.nameOfCategory = (TextView) oCurrentView.findViewById(R.id.text_View_name_of_category);
 //
 //        menuHolder.depOfName = (TextView) oCurrentView.findViewById(R.id.text_View_dep_of_name);
@@ -51,14 +51,14 @@ public class DoctorAdapter  extends CursorAdapter {
         if (menuHolder != null) {
             sCode = cursor.getString(cursor.getColumnIndex(EnableDoctors.CODE));
             sFIO = cursor.getString(cursor.getColumnIndex(EnableDoctors.NAME));
-//            sSpecName = cursor.getString(cursor.getColumnIndex(EnableDoctors.SPECNAME));
+            sSpecName = cursor.getString(cursor.getColumnIndex(EnableDoctors.SPECNAME));
 //            sCategName = cursor.getString(cursor.getColumnIndex(EnableDoctors.CATEGNAME));
 //            sDepName = cursor.getString(cursor.getColumnIndex(EnableDoctors.DEPNAME));
 //            sNote = cursor.getString(cursor.getColumnIndex(EnableDoctors.NOTE));
 
             menuHolder.tvCode.setText(sCode);
             menuHolder.tvFIO.setText(sFIO);
-//            menuHolder.nameOfSpeciality.setText(sSpecName);
+            menuHolder.nameOfSpeciality.setText(sSpecName);
 //            menuHolder.nameOfCategory.setText(sCategName);
 //            menuHolder.depOfName.setText(sDepName);
 //            menuHolder.note.setText(sNote);
@@ -73,7 +73,7 @@ public class DoctorAdapter  extends CursorAdapter {
 
         TextView tvCode;
         TextView tvFIO;
-//        TextView nameOfSpeciality;
+        TextView nameOfSpeciality;
 //        TextView nameOfCategory;
 //        TextView depOfName;
 //        TextView note;

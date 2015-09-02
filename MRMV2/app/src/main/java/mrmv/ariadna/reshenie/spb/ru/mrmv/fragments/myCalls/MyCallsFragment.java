@@ -22,7 +22,7 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.DataBaseHelper;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.callsAction.Calls;
-import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.doctorCards.CommonDoctorCard;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.CommonDoctorCard;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.myCalls.my_calls_item.AdapterMenuMyCalls;
 
 /**
@@ -69,7 +69,10 @@ public class MyCallsFragment extends Fragment implements LoaderManager.LoaderCal
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPage = getArguments().getInt(ARG_PAGE);
+        if(getArguments() != null){
+            mPage = getArguments().getInt(ARG_PAGE);
+        }
+
 
         oDataBaseHelper = DataBaseHelper.getInstance(getActivity());
 

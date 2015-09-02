@@ -17,9 +17,10 @@ public class Patients {
     final public static String PATIENT_NAME = "firstName";
     final public static String PATIENT_SECONDNAME = "lastName";
     final public static String PATIENT_THIRD_NAME = "secondName";
-    final public static String NUMBER_CARD = "number_card";
+    final public static String NUMBER_CARD = "num";
     final public static String PHONE = "phone";
     final public static String ADDRESS = "address";
+    final public static String BIRTHDATE = "birthDate";
 
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE "
             + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -29,7 +30,8 @@ public class Patients {
             + PATIENT_THIRD_NAME + " VARCHAR(255),"
             + NUMBER_CARD + " VARCHAR(255),"
             + PHONE + " VARCHAR(255),"
-            + ADDRESS + " VARCHAR(255));";
+            + ADDRESS + " VARCHAR(255),"
+            + BIRTHDATE + " VARCHAR(255));";
 
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS "
             + TABLE_NAME;

@@ -12,7 +12,7 @@
 
         <CalendarView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:id="@+id/cwChooseDate" />
 
         <LinearLayout
@@ -31,17 +31,17 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Врач: "
                     android:id="@+id/textView8"
-                    android:layout_weight="0.5"
-                    android:textSize="@dimen/size_of_text_item_patient" />
+                    android:layout_weight="0.6"
+                    android:textSize="@dimen/size_of_text_find_emk" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Large Text"
-                    android:id="@+id/textView9"
-                    android:layout_weight="0.5"
-                    android:textSize="@dimen/size_of_text_item_patient" />
+                    android:text="@string/doctor_not_selected"
+                    android:id="@+id/tvNameOfDoctor"
+                    android:layout_weight="0.4"
+                    android:textSize="@dimen/size_of_text_find_emk" />
             </LinearLayout>
 
             <LinearLayout
@@ -56,17 +56,17 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Специальность:"
                     android:id="@+id/textView13"
-                    android:layout_weight="0.5"
-                    android:textSize="@dimen/size_of_text_item_patient" />
+                    android:layout_weight="0.6"
+                    android:textSize="@dimen/size_of_text_find_emk" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Large Text"
-                    android:id="@+id/textView14"
-                    android:layout_weight="0.5"
-                    android:textSize="@dimen/size_of_text_item_patient" />
+                    android:text="@string/special_not_selected"
+                    android:id="@+id/tvSpecName"
+                    android:layout_weight="0.4"
+                    android:textSize="@dimen/size_of_text_find_emk" />
             </LinearLayout>
 
             <LinearLayout
@@ -81,17 +81,17 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Пациент: "
                     android:id="@+id/textView11"
-                    android:layout_weight="0.5"
-                    android:textSize="@dimen/size_of_text_item_patient" />
+                    android:layout_weight="0.6"
+                    android:textSize="@dimen/size_of_text_find_emk" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Large Text"
-                    android:id="@+id/textView12"
-                    android:layout_weight="0.5"
-                    android:textSize="@dimen/size_of_text_item_patient" />
+                    android:text="@string/pacient_not_selected"
+                    android:id="@+id/tvPacientName"
+                    android:layout_weight="0.4"
+                    android:textSize="@dimen/size_of_text_find_emk" />
             </LinearLayout>
 
         </LinearLayout>
@@ -103,12 +103,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
-        android:layout_margin="@dimen/padding_right_or_left">
+        android:layout_marginTop="@dimen/margin_top_numbers_list">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/time_visit"
+            android:id="@+id/tvTimeVisit"
+            android:layout_gravity="center_horizontal" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listView" />
+            android:id="@+id/lvNumbers"
+            android:layout_marginTop="@dimen/margin_top_numbers_list" />
+
+        <FrameLayout
+            android:id="@+id/flProgressLoadNumbs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shadow_color_numbs"
+            android:visibility="gone" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flNotFoundSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shadow_color_numbs"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/not_found_schedule"
+                android:id="@+id/textView9"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
     </LinearLayout>
 
 </LinearLayout>

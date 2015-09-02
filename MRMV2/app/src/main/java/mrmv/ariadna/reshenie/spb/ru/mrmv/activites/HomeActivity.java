@@ -26,6 +26,7 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.drawerMenu.AdapterMenuItem;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.drawerMenu.MenuItem;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.documentation.DocumentationFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.findEmk.FindEmkFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.myCalls.MyCallsMenuFragmet;
 
@@ -243,24 +244,19 @@ public class HomeActivity extends FragmentActivity {
                                 .addToBackStack("fragmentStack")
                                 .commit();
 
+                    } else  if ((position - 1) == DOCUMENTATION) {
+
+                        DocumentationFragment oAppointmentFragment = new DocumentationFragment();
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.main_active_layout, oAppointmentFragment)
+                                .addToBackStack("fragmentStack")
+                                .commit();
+
+
+
                     }
-//                    else  if ((position - 1) == BOOKING_VISIT) {
-//
-//                        bundle.putInt(KEY_FOR_GET_MODE, BOOKING_VISIT);
-//
-//                        AppointmentFragment oAppointmentFragment = new AppointmentFragment();
-//                        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//                        oAppointmentFragment.setArguments(bundle);
-//
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.main_active_layout, oAppointmentFragment)
-//                                .addToBackStack("fragmentStack")
-//                                .commit();
-//
-//
-//
-//                    }
                 }else if(position == 0){
                     runOnUiThread(new Runnable() {
                         @Override

@@ -10,17 +10,27 @@
         android:text="@string/code_doctor_on_dep"
         android:paddingLeft="5dp"
         android:id="@+id/text_View_code_doctor_on_dep"
-        android:layout_weight="0.7"
-        android:textSize="18sp" />
+        android:layout_weight="0.75"
+        android:textSize="@dimen/size_of_text_item_patient" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/fio_doctor"
-        android:paddingLeft="5dp"
+        android:paddingLeft="@dimen/padding_save_button"
         android:id="@+id/text_View_fio_doctor"
-        android:layout_weight="0.3"
-        android:textSize="18sp" />
+        android:layout_weight="0.50"
+        android:textSize="@dimen/size_of_text_item_patient" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/special_of_doctor"
+        android:id="@+id/text_View_special_doctor"
+        android:layout_weight="0.50"
+        android:paddingLeft="@dimen/padding_save_button"
+        android:textSize="@dimen/size_of_text_item_patient" />
 
 </LinearLayout>

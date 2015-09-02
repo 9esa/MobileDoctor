@@ -12,16 +12,19 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.actionMedicalGu
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.actionMedicalGuidesMkb10.MedicalGuidesMKB10;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.callsAction.Calls;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.diagnoseAction.Diagnose;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.doctors.Doctor;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.extraFieldsStatTalon.ExtraFieldStatTalon;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.historyAction.History;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.informationAboutPatient.Patients;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.listOfDoctorsAction.EnableDoctors;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.mesAction.Mes;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.mesAction.MesForDiagnoses;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.numbers.Numbers;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.EnableProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.FullFieldProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.StructureFullFieldProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocolsFiltersAction.ProtocolsFilter;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.specials.Special;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.statusDataBase.StatusDatabase;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.visitAction.Visit;
 
@@ -67,6 +70,9 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns {
         db.execSQL(EnableDoctors.SQL_CREATE_ENTRIES);
         db.execSQL(ProtocolsFilter.SQL_CREATE_ENTRIES);
         db.execSQL(Patients.SQL_CREATE_ENTRIES);
+        db.execSQL(Numbers.SQL_CREATE_ENTRIES);
+        db.execSQL(Special.SQL_CREATE_ENTRIES);
+        db.execSQL(Doctor.SQL_CREATE_ENTRIES);
 
         setbNewDataBase(true);
     }
@@ -92,6 +98,9 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns {
         db.execSQL(EnableDoctors.SQL_DELETE_ENTRIES);
         db.execSQL(ProtocolsFilter.SQL_DELETE_ENTRIES);
         db.execSQL(Patients.SQL_DELETE_ENTRIES);
+        db.execSQL(Numbers.SQL_DELETE_ENTRIES);
+        db.execSQL(Special.SQL_DELETE_ENTRIES);
+        db.execSQL(Doctor.SQL_DELETE_ENTRIES);
 
         onCreate(db);
     }
@@ -115,6 +124,10 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns {
         EnableDoctors.removeAllInfornationAboutTables(this);
         ProtocolsFilter.removeAllInfornationAboutTables(this);
         Patients.removeAllInfornationAboutTables(this);
+        Numbers.removeAllInfornationAboutTables(this);
+        Special.removeAllInfornationAboutTables(this);
+        Doctor.removeAllInfornationAboutTables(this);
+
     }
 
     public boolean isbNewDataBase() {

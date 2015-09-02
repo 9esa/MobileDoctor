@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:layout_weight="0.33" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/element_not_loaded"
+        android:id="@+id/tvItemSelected"
+        android:layout_gravity="center"
+        android:layout_weight="0.33"
+        android:minHeight="50sp"
+        android:layout_margin="@dimen/all_margin_item_number"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="@dimen/size_of_text_item_patient" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:layout_weight="0.33" />
+</LinearLayout>

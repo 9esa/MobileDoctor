@@ -43,6 +43,9 @@ public class SelectDialogWithRequest extends DialogFragment  implements DialogIn
     private Intent intentCheckingData;
     /****/
 
+    /**
+     * Интерфейс позволяющий управлять диалогом
+     */
     private static IRouteDialogWithRequest iRouteDialogWithRequest;
 
     private CursorAdapter oCursorAdapter;
@@ -113,8 +116,12 @@ public class SelectDialogWithRequest extends DialogFragment  implements DialogIn
         listViewElements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int iItemSelected, long l) {
-                iRouteDialogWithRequest.returnSelectedValue(adapterView, iItemSelected);
+                /*
+                    Возвращаем выбранное значение
+                 */
                 cancelDialog();
+                iRouteDialogWithRequest.returnSelectedValue(adapterView, iItemSelected);
+
             }
         });
 
@@ -155,11 +162,18 @@ public class SelectDialogWithRequest extends DialogFragment  implements DialogIn
 
         oServiceLoading = ((ServiceLoading.ServiceBinder) binder).getService();
         bConnectToServiceDownload = true;
-    //Todo Добавить прогрес бар
-        if(getiRouteDialogWithRequest() != null){
-            getiRouteDialogWithRequest().getInformationByObject(oServiceLoading, getoLoginAccount(), getoRequestValue(), this);
-        }
 
+        startLoadDataInDialog();
+    }
+
+    public void startLoadDataInDialog(){
+        //Todo Добавить прогрес бар
+        if(getiRouteDialogWithRequest() != null){
+            if(oServiceLoading != null){
+                getiRouteDialogWithRequest().getInformationByObject(oServiceLoading, getoLoginAccount(), getoRequestValue(), this);
+            }
+
+        }
     }
 
     public CursorAdapter getoCursorAdapter() {
@@ -198,6 +212,9 @@ public class SelectDialogWithRequest extends DialogFragment  implements DialogIn
         return iRouteDialogWithRequest;
     }
 
+    /*
+       Устанавливаем Callback для возврата
+     */
     public void setiRouteDialogWithRequest(IRouteDialogWithRequest iRouteDialogWithRequest) {
         this.iRouteDialogWithRequest = iRouteDialogWithRequest;
     }

@@ -78,11 +78,26 @@ public class CommonMainLoading {
                                         }
                             }
 
-                            return arrayJSONObjects;
-
                         }
                     }
                 }
+
+                if (Boolean.valueOf(oJsonObject.get("msg") != null)) {
+
+                    if (oJsonObject instanceof JSONObject) {
+                            if (oJsonObject.get("msg") instanceof JSONObject) {
+                                JSONObject oGuidesJSON = (JSONObject) oJsonObject.get("msg");
+
+                                Object oGuides = oGuidesJSON.get("status");
+
+                                String sValue = oGuides.toString();
+
+                                String sConstant = "LIMIT_EXCEEDED";
+
+                            }
+                    }
+                }
+
 
             } catch (JSONException e) {
                 // return null;

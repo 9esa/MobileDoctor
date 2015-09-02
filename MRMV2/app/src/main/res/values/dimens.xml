@@ -35,5 +35,11 @@
     <dimen name="size_of_text_item_patient">17sp</dimen>
     <dimen name="all_padding_item_patient">10dp</dimen>
     <dimen name="margin_header_emk">1dp</dimen>
+    <dimen name="all_margin_item_number">15sp</dimen>
+    <dimen name="margin_top_numbers_list">5sp</dimen>
+    <dimen name="left_padding_login_input">10dp</dimen>
+    <dimen name="height_icon_drawer">30sp</dimen>
+    <dimen name="margin_left_and_right_drawer_icon">5sp</dimen>
+    <dimen name="margin_top_for_drawer_icon">17sp</dimen>
 
 </resources>

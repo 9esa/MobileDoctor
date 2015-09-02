@@ -41,7 +41,7 @@ public class EmkAdapter extends CursorAdapter {
     public void bindView(View oCurrentView, Context context, Cursor cursor) {
 
         String sId = "", sName = "", sSecondName = "",
-                sThirdName = "", sNumberCard = "", sPhone = "", sAddress =  "";
+                sThirdName = "", sNumberCard = "", sPhone = "", sAddress =  "", sDateBorn = "";
 
         MenuHolder menuHolder = (MenuHolder) oCurrentView.getTag();
 
@@ -54,20 +54,20 @@ public class EmkAdapter extends CursorAdapter {
             sNumberCard = cursor.getString(cursor.getColumnIndex(Patients.NUMBER_CARD));
             sPhone = cursor.getString(cursor.getColumnIndex(Patients.PHONE));
             sAddress = cursor.getString(cursor.getColumnIndex(Patients.ADDRESS));
+            sDateBorn = cursor.getString(cursor.getColumnIndex(Patients.BIRTHDATE));
+
 
             menuHolder.sIdPatient = sId;
-            menuHolder.tvNumber.setText(isNotNullString(sId));
+            menuHolder.tvNumber.setText(isNotNullString(sNumberCard));
             menuHolder.tvFIO.setText(isNotNullString(sSecondName) + " " + isNotNullString(sName) + " " + isNotNullString(sThirdName));
             //menuHolder.tvNumber.setText(isNotNullString(sNumberCard));
             menuHolder.tvUserPhone.setText(isNotNullString(sPhone));
             menuHolder.tvAddress.setText(isNotNullString(sAddress));
-
+            menuHolder.tvDateBorn.setText(isNotNullString(sDateBorn));
         }
     }
 
-    /**
-     * Ёлементы дл€ каждой строки
-     */
+
     public static class MenuHolder {
 
         String sIdPatient;
@@ -91,6 +91,5 @@ public class EmkAdapter extends CursorAdapter {
                 }
             }
     }
-
 
 }

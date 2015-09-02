@@ -32,7 +32,7 @@ public class ChoosingNewDoctor implements IRouteDialogWithRequest {
     private String sVisitId;
     private int iTypeMode;
 
-    public ChoosingNewDoctor(MesFragment oMesFragment, LoginAccount oLoginAccount, Button btnSourceButton,String sVisitId) {
+    public ChoosingNewDoctor(MesFragment oMesFragment, LoginAccount oLoginAccount, Button btnSourceButton, String sVisitId) {
         this.oMesFragment = oMesFragment;
         this.oLoginAccount = oLoginAccount;
         this.btnSourceButton = btnSourceButton;
@@ -55,8 +55,6 @@ public class ChoosingNewDoctor implements IRouteDialogWithRequest {
             selectDialogWithRequest.setoRequestValue(new Object());
             selectDialogWithRequest.show(oMesFragment.getFragmentManager(), "addNewDoctor");
         }
-
-
     }
 
     @Override

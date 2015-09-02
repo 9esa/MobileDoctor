@@ -17,12 +17,15 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.actionMedicalGu
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.actionMedicalGuidesMkb10.LoadMedicalGuidesMKB10;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.callsAction.LoadCalls;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.diagnoseAction.LoadDiagnose;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.doctors.LoadDoctor;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.historyAction.LoadHistory;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.informationAboutPatient.LoadInformationAboutPatient;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.listOfDoctorsAction.LoadEnableDoctors;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.mesAction.LoadMes;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.numbers.LoadNumbers;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.LoadProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocolsFiltersAction.LoadProtocolsFilters;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.specials.LoadSpecial;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.statusDataBase.StatusDatabase;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.visitAction.LoadVisit;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.ILoginEnableAccess;
@@ -189,6 +192,28 @@ public class ServiceLoading extends Service {
 
         return true;
     }
+
+    public boolean getListNumbers(LoginAccount oLoginAccount, String sDate, String sDocDepId, ICommonLoadComplete iLoadedComleteCallBack){
+
+        new LoadNumbers(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadInformationAboutEnableDoctors(sDate, sDocDepId, iLoadedComleteCallBack);
+
+        return true;
+    }
+
+    public boolean getListSpecials(LoginAccount oLoginAccount, ICommonLoadComplete iLoadedComleteCallBack){
+
+        new LoadSpecial(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadInformationAboutSpecials(iLoadedComleteCallBack);
+
+        return true;
+    }
+
+    public boolean getListDoctorsViaSpecials(LoginAccount oLoginAccount, String sIdSpecial, ICommonLoadComplete iLoadedComleteCallBack){
+
+        new LoadDoctor(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadInformationAboutListDoctor(sIdSpecial, iLoadedComleteCallBack);
+
+        return true;
+    }
+
 
     public int startUpdateGuides(ILoginEnableAccess iLoginEnableAccess) {
 

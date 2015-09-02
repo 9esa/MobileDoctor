@@ -165,5 +165,18 @@
     <string name="date_was_born">Дата рождения</string>
     <string name="number_phone_for_user">Номер телефона</string>
     <string name="address">Адрес</string>
+    <string name="time_for_visit">Время приема</string>
+    <string name="special_of_doctor">Специальность</string>
+    <string name="doctor_not_selected">Доктор не выбран</string>
+    <string name="special_not_selected">Специальность не выбрана</string>
+    <string name="pacient_not_selected">Пациент не выбран</string>
+    <string name="clarify__specialty">Уточните специальность врача</string>
+    <string name="not_found_schedule">Нет расписания на заданную дату</string>
+    <string name="time_visit">Время приема</string>
+    <string name="element_not_loaded">Элемент не загружен</string>
+    <string name="status_number">Статус номерка</string>
+
+    <string name="enable_numb">Доступен</string>
+    <string name="disable_numb">Не доступен</string>
 
 </resources>

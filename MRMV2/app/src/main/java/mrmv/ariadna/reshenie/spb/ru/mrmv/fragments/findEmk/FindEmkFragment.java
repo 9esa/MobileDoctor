@@ -65,6 +65,9 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
     private int iCurrentMode;
 
+    public static String KEY_FOR_GET_USER_ID = "key_for_get_user_id";
+    public static String KEY_FOR_GET_FIO = "key_for_get_fio";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +84,10 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
         View oView = inflater.inflate(R.layout.find_emk_fragment, container, false);
 
-        iCurrentMode =  getArguments().getInt(HomeActivity.KEY_FOR_GET_MODE);
+        if(getArguments()!= null){
+            iCurrentMode =  getArguments().getInt(HomeActivity.KEY_FOR_GET_MODE);
+        }
+
 
         startAllServices();
 
@@ -115,9 +121,23 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
         lvListOfUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int iItemSelected, long l) {
 
                 if(view != null){
+
+                    Cursor oCurrentSelectedElements = ((Cursor) adapterView.getAdapter().getItem(iItemSelected));
+
+                    String sId = "", sName = "", sSecondName = "",
+                            sThirdName = "";
+
+                    if (oCurrentSelectedElements != null) {
+
+                        sId = oCurrentSelectedElements.getString(oCurrentSelectedElements.getColumnIndex(Patients.IDPATIENT));
+                        sName = oCurrentSelectedElements.getString(oCurrentSelectedElements.getColumnIndex(Patients.PATIENT_NAME));
+                        sSecondName = oCurrentSelectedElements.getString(oCurrentSelectedElements.getColumnIndex(Patients.PATIENT_SECONDNAME));
+                        sThirdName = oCurrentSelectedElements.getString(oCurrentSelectedElements.getColumnIndex(Patients.PATIENT_THIRD_NAME));
+
+                    }
 
                     if(iCurrentMode == HomeActivity.FIND_EMK){
 
@@ -137,7 +157,14 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
                     }else if(iCurrentMode == HomeActivity.BOOKING_VISIT){
 
+                        Bundle bundle = new Bundle();
+
+                        bundle.putString(KEY_FOR_GET_USER_ID, sId);
+                        bundle.putString(KEY_FOR_GET_FIO, isNotNullString(sSecondName) + " " + isNotNullString(sName) + " " + isNotNullString(sThirdName));
+
                         ChooseDoctorFragment oChooseDoctorFragment = new ChooseDoctorFragment();
+                        oChooseDoctorFragment.setoLoginAccount(getoLoginAccount());
+                        oChooseDoctorFragment.setArguments(bundle);
 
                         FragmentManager oFragmentManager = getFragmentManager();
                         FragmentTransaction oFragmentTransaction =  oFragmentManager.beginTransaction();
@@ -203,6 +230,18 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
     }
 
+    public String isNotNullString(String sValueString){
+        if(sValueString == null){
+            return "";
+        }else{
+            if(sValueString.equals("null")){
+                return "";
+            }else{
+                return sValueString;
+            }
+        }
+    }
+
     private void makeObjectForRequest(){
 
         ItemEmk oItemEmk =  new ItemEmk();
@@ -245,9 +284,9 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
             String sValue = etSecondName.getText().toString();
 
             if(sValue.equals("")){
-                oItemEmk.setsName(null);
+                oItemEmk.setsSecondName(null);
             }else {
-                oItemEmk.setsName(sValue);
+                oItemEmk.setsSecondName(sValue);
             }
 
         }
@@ -257,9 +296,9 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
             String sValue = etThirdName.getText().toString();
 
             if(sValue.equals("")){
-                oItemEmk.setsName(null);
+                oItemEmk.setsThirdName(null);
             }else {
-                oItemEmk.setsName(sValue);
+                oItemEmk.setsThirdName(sValue);
             }
 
         }
@@ -304,7 +343,7 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return  new CursorLoaderForPatients(getActivity(), oDataBaseHelper);
+        return new CursorLoaderForPatients(getActivity(), oDataBaseHelper);
     }
 
     @Override

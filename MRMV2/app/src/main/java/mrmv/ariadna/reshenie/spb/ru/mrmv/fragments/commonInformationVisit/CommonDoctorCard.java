@@ -1,4 +1,4 @@
-package mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.doctorCards;
+package mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit;
 
 
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.appointment.ChooseDoctorFragment;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.doctorCards.DoctorCardFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.historyIllFragments.HistoryFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.mesFragments.MesFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.questionListFragment.QuestionListFragment;
@@ -46,6 +48,9 @@ public class CommonDoctorCard extends Fragment{
 
         QuestionListFragment.setoLoginAccount(oLoginAccount);
         QuestionListFragment.setMenuHolder(menuHolder);
+
+        ChooseDoctorFragment.setoLoginAccount(oLoginAccount);
+        ChooseDoctorFragment.setMenuHolder(menuHolder);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +73,9 @@ public class CommonDoctorCard extends Fragment{
 
         mTabHost.addTab(mTabHost.newTabSpec("history_helth").setIndicator("История лечения"),
                 HistoryFragment.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec("book_visit").setIndicator("Запись на прием"),
+                ChooseDoctorFragment.class, null);
 
         return oView;
 

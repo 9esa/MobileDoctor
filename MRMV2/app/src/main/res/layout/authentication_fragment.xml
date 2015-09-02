@@ -63,7 +63,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:hint="@string/login" />
+                android:hint="@string/login"
+                android:paddingLeft="@dimen/left_padding_login_input" />
 
             <EditText
                 android:id="@+id/authentication_password"
@@ -79,7 +80,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:paddingLeft="@dimen/left_padding_login_input" />
 
             <Button
                 android:id="@+id/authentication_login_btn"
@@ -92,7 +94,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#ffe4e4e4" />
+                android:background="@drawable/shape_selected"
+                android:textColor="#d7fff8fb" />
 
         </LinearLayout>
     </FrameLayout>

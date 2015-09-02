@@ -1,7 +1,5 @@
 package mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.findEmk;
 
-import java.util.Date;
-
 /**
  * Created by kirichenko on 25.08.2015.
  */
@@ -9,7 +7,7 @@ public class ItemEmk {
 
     private Integer iNumberCard;
     private Integer iPhone;
-    private Date oDateBorn;
+    private String oDateBorn;
 
     private String sName;
     private String sSecondName;
@@ -36,11 +34,11 @@ public class ItemEmk {
         this.iPhone = iPhone;
     }
 
-    public Date getoDateBorn() {
+    public String getoDateBorn() {
         return oDateBorn;
     }
 
-    public void setoDateBorn(Date oDateBorn) {
+    public void setoDateBorn(String oDateBorn) {
         this.oDateBorn = oDateBorn;
     }
 
