@@ -157,6 +157,7 @@ public class Diagnose {
             HashMap <String, String> mapOfAttr = (HashMap<String, String>) itemTag.getAttrs();
 
             ContentValues values = new ContentValues();
+
             values.put(VISITID, oItemVisit.getsVisitId());
 
             values.put(DIAGNOSEID, mapOfAttr.get(DIAGNOSEID));
@@ -178,17 +179,41 @@ public class Diagnose {
             values.put(DISPOFFTEXT, mapOfAttr.get(DISPOFFTEXT));
             values.put(TRAVMAID,mapOfAttr.get(TRAVMAID));
             values.put(TRAVMATEXT, mapOfAttr.get(TRAVMATEXT));
+
             values.put(STATING, NEW_DIAGNOS);
+
+      //      deleteDiagnoseValue(oDataBaseHelper, mapOfAttr.get(DIAGNOSEID), mapOfAttr.get(DIAGNOSTYPE), oItemVisit.getsVisitId());
 
             db.insertWithOnConflict(Diagnose.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
         }
     }
 
+
+    public static void deleteDiagnoseValue(DataBaseHelper dbHelper, String sDiagnoseId, String sDiagnoseType, String sVisitId){
+
+        String selectQuery = "DELETE FROM " + TABLE_NAME + " WHERE " + DIAGNOSEID + " = " + sDiagnoseId + " AND " + DIAGNOSTYPE + " = " + sDiagnoseType  + " AND " + VISITID + " = " + sVisitId;
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL(selectQuery);
+
+    }
+
     public static void removeAllInfornationAboutTables(DataBaseHelper dbHelper){
 
         String selectQuery = "DELETE FROM " + TABLE_NAME ;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL(selectQuery);
+    }
+
+    public static void updateAllDiagnosesAfterSend(DataBaseHelper dbHelper){
+
+        String selectQuery = "DELETE FROM " + TABLE_NAME + " WHERE " + STATING + " <> " + NEW_DIAGNOS;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL(selectQuery);
+
+        selectQuery = "UPDATE " + TABLE_NAME + " SET " + STATING + " = " + BASE_DIAGNOS;
+        db = dbHelper.getWritableDatabase();
         db.execSQL(selectQuery);
     }
 

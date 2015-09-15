@@ -85,7 +85,4 @@ public class EnableProtocols {
         db.execSQL(selectQuery);
     }
 
-
-
-
 }

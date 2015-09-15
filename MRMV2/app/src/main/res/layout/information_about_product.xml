@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="1000dp"
+    android:minHeight="1000dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView2"
+        android:layout_gravity="center_horizontal" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/main_name_of_product"
+                    android:id="@+id/tvTitleObject"
+                    android:textColor="#df264dff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:id="@+id/tvNameOfProduct"
+                    android:layout_marginLeft="@dimen/margin_left_value"
+                    android:text="Medium Text"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/tvTitleIdentifikatorNomenklaturnojPoziciiRls"
+                    android:text="@string/tvTitleIdentifikatorNomenklaturnojPoziciiRls"
+                    android:textColor="#df264dff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/tvIdentifikatorNomenklaturnojPoziciiRls"
+                    android:layout_marginLeft="@dimen/margin_left_value"
+                    android:text="Medium Text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title_english_or_latine_name"
+                    android:id="@+id/tvTitleEnglishName"
+                    android:textColor="#df264dff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvEnglishName"
+                    android:layout_marginLeft="@dimen/margin_left_value"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title_active_component"
+                    android:id="@+id/tvTitleActiveComponent"
+                    android:textColor="#df264dff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvActiveComponent"
+                    android:layout_marginLeft="@dimen/margin_left_value"
+                    android:textStyle="italic"
+                    android:textColor="#dfff3b2c" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_life_rls"
+                        android:id="@+id/tvTitleLife"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvLife"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_form_output"
+                        android:id="@+id/tvTitleForm"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvForm"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_dosage"
+                        android:id="@+id/tvTitleDosage"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvDosage"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_filling"
+                        android:id="@+id/tvTitleFilling"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvFilling"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_packing"
+                        android:id="@+id/tvTitlePacking"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvPacking"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_manufacture"
+                        android:id="@+id/tvTitleManufacture"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvManufacture"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_country_manufacture"
+                        android:id="@+id/tvTitleCountryManufacture"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvCountryManufacture"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_id_registration"
+                        android:id="@+id/tvTitleIdRegistration"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvIdRegistration"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_date_registration"
+                        android:id="@+id/tvTitleDateRegistration"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvDateRegistration"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_registrator"
+                        android:id="@+id/tvTitleRegistrator"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvRegistrator"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                    android:layout_marginTop="@dimen/margin_top_rls"
+                    android:layout_weight="0.5" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/title_country_registration"
+                        android:id="@+id/tvTitleCountryRegistrator"
+                        android:textSize="@dimen/text_zise_of_rls_main"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Medium Text"
+                        android:id="@+id/tvCountryRegistrator"
+                        android:layout_marginLeft="@dimen/margin_left_value"
+                        android:textSize="@dimen/text_zise_of_rls_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title_age_product"
+                    android:id="@+id/tvTitleAgeProduct"
+                    android:textColor="#df264dff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvAgeProduct"
+                    android:layout_marginLeft="@dimen/margin_left_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title_farm_group"
+                    android:id="@+id/tvTitleFarmGroup"
+                    android:textColor="#df264dff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvFarmGroup"
+                    android:layout_marginLeft="@dimen/margin_left_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginRight="@dimen/margin_left_and_right_item_rls"
+                android:layout_marginTop="@dimen/margin_top_rls" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title_atx"
+                    android:id="@+id/tvTitleATX"
+                    android:textColor="#df264dff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvATX"
+                    android:layout_marginLeft="@dimen/margin_left_value"
+                    android:textColor="#359f29" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -36,11 +36,12 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.numbers.Numbers
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit.mesFragments.DoctorAdapter;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.findEmk.FindEmkFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.services.ServiceLoading;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.services.ServiceSending;
 
 /**
  * Created by kirichenko on 25.08.2015.
  */
-public class AppointmentFragment extends Fragment implements ICommonLoadComplete, LoaderManager.LoaderCallbacks<Cursor>, IRouteDialogWithRequest {
+public class AppointmentFragment extends Fragment implements ICommonLoadComplete, LoaderManager.LoaderCallbacks<Cursor>, IRouteDialogWithRequest, IDialogConfirmWorkWithNumb {
 
     private CalendarView getAllViewNumbers;
 
@@ -50,40 +51,30 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
 
     private ListView lvListOfNumbers;
 
-    private FrameLayout flProgressLoadNumbs;
-    private FrameLayout flNotFoundSchedule;
+    private FrameLayout flProgressLoadNumbs, flNotFoundSchedule;
 
-    /**
-     * Необходимо для подключения к сервису для загрузки
-     */
     private ServiceLoading oServiceLoading;
     private ServiceConnection sConnectionChecking;
     private boolean bConnectToServiceDownload = false;
     private Intent intentCheckingData;
 
+    private ServiceConnection sConnectionTransfer;
+    private Intent intentTransferData;
+    private Boolean bConnectToServiceUpload;
+    private ServiceSending oServiceTransfer;
+
+
     private DataBaseHelper oDataBaseHelper;
 
-    /**
-     * Адаптер для выбора врачей
-     */
     private DoctorAdapter oDoctorAdapter;
 
-    /**
-     * Адаптер для номерков
-     */
     private AppointmentAdapter oAppointmentAdapter;
 
-    /**
-     * Объект для выбора врача, привязанного к этой ученой записи
-     */
     private SelectDialogWithRequest selectDialogWithRequest;
 
-    //Статичный логин. Т.к. необходимо гарантировать наличие токена
     static private LoginAccount oLoginAccount;
 
-
-    private String sName, sSpecName;
-
+    private String sName, sSpecName, sRequestDate, sFio, sIdPacient, sDocDepId, sIdNumber = "", sStatusNumber = "";
 
     public String getsDocDepId() {
         return sDocDepId;
@@ -92,10 +83,6 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
     public void setsDocDepId(String sDocDepId) {
         this.sDocDepId = sDocDepId;
     }
-
-    private String sFio, sIdPacient;
-
-    private String sDocDepId;
 
     @Nullable
     @Override
@@ -137,11 +124,10 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
 
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Активизируем наш хелпер для базы данных
+
         oDataBaseHelper = DataBaseHelper.getInstance(getActivity());
 
         oAppointmentAdapter  = new AppointmentAdapter(getActivity(), null);
@@ -175,7 +161,7 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
                 oServiceLoading = ((ServiceLoading.ServiceBinder) binder).getService();
                 bConnectToServiceDownload = true;
 
-                if(sDocDepId == null){
+                if( getsDocDepId() == null){
                     selectNewDoctorForNumbers();
                 }
 
@@ -188,7 +174,23 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
             }
         };
 
+        intentTransferData = new Intent(getActivity(), ServiceSending.class);
+
+        sConnectionTransfer = new ServiceConnection() {
+
+            public void onServiceConnected(ComponentName name, IBinder binder) {
+                oServiceTransfer = ((ServiceSending.ServiceBinder) binder).getService();
+                bConnectToServiceUpload = true;
+            }
+
+            public void onServiceDisconnected(ComponentName name) {
+                bConnectToServiceUpload = false;
+            }
+        };
+
         getActivity().bindService(intentCheckingData, sConnectionChecking, getActivity().BIND_AUTO_CREATE);
+        getActivity().bindService(intentTransferData, sConnectionTransfer, getActivity().BIND_AUTO_CREATE);
+
 
     }
 
@@ -208,6 +210,10 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
         this.sSpecName = sSpecName;
     }
 
+    public String getsIdPacient() {
+        return sIdPacient;
+    }
+
     private void getAllViewElements(View oView){
         getAllViewNumbers = (CalendarView) oView.findViewById(R.id.cwChooseDate);
 
@@ -225,6 +231,48 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
 
         lvListOfNumbers.setAdapter(oAppointmentAdapter);
 
+        lvListOfNumbers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int iItemSelected, long l) {
+
+                Cursor oCurrentSelectedElements = ((Cursor) adapterView.getAdapter().getItem(iItemSelected));
+
+                if (oCurrentSelectedElements != null) {
+
+                    sIdNumber = oCurrentSelectedElements.getString(oCurrentSelectedElements.getColumnIndex(Numbers.IDNUMBER));
+                    sStatusNumber = oCurrentSelectedElements.getString(oCurrentSelectedElements.getColumnIndex(Numbers.STATUS));
+
+                    actionClickOnItem(oCurrentSelectedElements.getString(oCurrentSelectedElements.getColumnIndex(Numbers.TIME)));
+
+                }
+            }
+        });
+
+    }
+
+    private void actionClickOnItem(String sTimeNumber){
+
+        Bundle bundle = new Bundle();
+
+        DialogConfirmWorkWithNumb dialogConfirmAction =  new DialogConfirmWorkWithNumb();
+
+        if(sStatusNumber.equals(AppointmentAdapter.ACTIVE)){
+            bundle.putString(DialogConfirmWorkWithNumb.KEY_FOR_TAKE_TITLE, oServiceLoading.getString(R.string.book_pacient));
+            bundle.putString(DialogConfirmWorkWithNumb.KEY_FOR_TAKE_MESSAGE, oServiceLoading.getString(R.string.confirm_book_on) + sTimeNumber + " ?");
+            dialogConfirmAction.setArguments(bundle);
+            dialogConfirmAction.setInterfaceForReturn(this);
+            dialogConfirmAction.show(getFragmentManager(), "dialogConfirmAction");
+        }else{
+            bundle.putString(DialogConfirmWorkWithNumb.KEY_FOR_TAKE_TITLE, oServiceLoading.getString(R.string.free_numb_pacient) );
+            bundle.putString(DialogConfirmWorkWithNumb.KEY_FOR_TAKE_MESSAGE, oServiceLoading.getString(R.string.free_booking_numb) + sTimeNumber + " ?");
+            dialogConfirmAction.setArguments(bundle);
+            dialogConfirmAction.setInterfaceForReturn(this);
+            dialogConfirmAction.show(getFragmentManager(), "dialogConfirmAction");
+        }
+    }
+
+    private void startRequestServer(String sIdNumber , String sStatusNumber){
+        oServiceTransfer.startSendingInformationaAboutBookingNumb(getoLoginAccount(),this,  sIdNumber, getsIdPacient(), sStatusNumber, sRequestDate, getsDocDepId());
     }
 
     private void initializeCalendar(){
@@ -237,7 +285,7 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
 
-                String sRequestDate = "";
+                sRequestDate = "";
 
                 if (day <= 8) {
                     sRequestDate += "0" + (day);
@@ -273,7 +321,7 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
                 flProgressLoadNumbs.setVisibility(View.VISIBLE);
                 flProgressLoadNumbs.bringToFront();
 
-                oServiceLoading.getListNumbers(getoLoginAccount(), sDate, getsDocDepId(), this);
+                oServiceLoading.getListNumbers(getoLoginAccount(), sDate, getsDocDepId(), this, sIdPacient);
             }
         }else{
             Toast.makeText(getActivity(), R.string.service_found_not_ready, Toast.LENGTH_LONG).show();
@@ -298,6 +346,11 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
     public void loadCompleted() {
         if(getActivity() != null){
             getActivity().runOnUiThread(new Runnable() {
@@ -316,6 +369,8 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, final Cursor oCursor) {
+
+        oAppointmentAdapter.setsIdPacient(getsIdPacient());
         oAppointmentAdapter.swapCursor(oCursor);
 
         if(getActivity() != null){
@@ -343,6 +398,27 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         getLoaderManager().destroyLoader(0);
+    }
+
+    @Override
+    public void clickYes() {
+        if(bConnectToServiceUpload){
+
+            startRequestServer(sIdNumber, sStatusNumber);
+            lvListOfNumbers.setVisibility(View.GONE);
+            flNotFoundSchedule.setVisibility(View.GONE);
+            flProgressLoadNumbs.setVisibility(View.VISIBLE);
+            flProgressLoadNumbs.bringToFront();
+
+        }else{
+            Toast.makeText(getActivity(), R.string.service_booking_not_ready, Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    @Override
+    public void clickNo() {
+
     }
 
     static class CursorLoaderForNumbers extends CursorLoader {
@@ -392,13 +468,13 @@ public class AppointmentFragment extends Fragment implements ICommonLoadComplete
                         tvNameOfDoctor.setText(sName);
                         tvSpecName.setText(sSpecName);
 
-
                         setsDocDepId(sDocdepId);
 
                         if(getAllViewNumbers!= null){
                             Date oDate=new Date(getAllViewNumbers.getDate());
                             SimpleDateFormat oSimpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-                            requestObjectFromServer(oSimpleDateFormat.format(oDate));
+                            sRequestDate = oSimpleDateFormat.format(oDate);
+                            requestObjectFromServer(sRequestDate);
                         }
                     }
                 });

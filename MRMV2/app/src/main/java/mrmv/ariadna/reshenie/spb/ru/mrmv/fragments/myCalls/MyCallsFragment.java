@@ -91,11 +91,10 @@ public class MyCallsFragment extends Fragment implements LoaderManager.LoaderCal
         listViewMyCalls = (ListView)view.findViewById(android.R.id.list);
         listViewMyCalls.setAdapter(adapterMenuMyCalls);
 
-        listViewMyCalls.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listViewMyCalls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View oView, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View oView, int i, long l) {
                 openDoctorsCard(oView);
-                return false;
             }
         });
 
@@ -126,7 +125,7 @@ public class MyCallsFragment extends Fragment implements LoaderManager.LoaderCal
         FragmentManager fragmentManager = myContext.getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
-                .replace(R.id.main_active_layout, oMyCallsMenuFragmet)
+                .replace(R.id.frame_container, oMyCallsMenuFragmet)
                 .addToBackStack("fragmentStack")
                 .commit();
 

@@ -24,6 +24,7 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.Enabl
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.FullFieldProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.StructureFullFieldProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocolsFiltersAction.ProtocolsFilter;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.rlsAction.RLSItem;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.specials.Special;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.statusDataBase.StatusDatabase;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.visitAction.Visit;
@@ -73,6 +74,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns {
         db.execSQL(Numbers.SQL_CREATE_ENTRIES);
         db.execSQL(Special.SQL_CREATE_ENTRIES);
         db.execSQL(Doctor.SQL_CREATE_ENTRIES);
+        db.execSQL(RLSItem.SQL_CREATE_ENTRIES);
 
         setbNewDataBase(true);
     }
@@ -101,6 +103,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns {
         db.execSQL(Numbers.SQL_DELETE_ENTRIES);
         db.execSQL(Special.SQL_DELETE_ENTRIES);
         db.execSQL(Doctor.SQL_DELETE_ENTRIES);
+        db.execSQL(RLSItem.SQL_DELETE_ENTRIES);
 
         onCreate(db);
     }
@@ -127,6 +130,31 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns {
         Numbers.removeAllInfornationAboutTables(this);
         Special.removeAllInfornationAboutTables(this);
         Doctor.removeAllInfornationAboutTables(this);
+        RLSItem.removeAllInfornationAboutTables(this);
+
+    }
+
+    public void deleteDataBasePartly(SQLiteDatabase db){
+        // Удаляем предыдущую таблицу при апгрейде
+        StatusDatabase.removeAllInfornationAboutTables(this);
+        Calls.removeAllInfornationAboutTables(this);
+        MedicalGuides.removeAllInfornationAboutTables(this);
+        MedicalGuidesMKB10.removeAllInfornationAboutTables(this);
+        Diagnose.removeAllInfornationAboutTables(this);
+        History.removeAllInfornationAboutTables(this);
+        Visit.removeAllInfornationAboutTables(this);
+        FullFieldProtocols.removeAllInfornationAboutTables(this);
+        StructureFullFieldProtocols.removeAllInfornationAboutTables(this);
+        ExtraFieldStatTalon.removeAllInfornationAboutTables(this);
+        Mes.removeAllInfornationAboutTables(this);
+        MesForDiagnoses.removeAllInfornationAboutTables(this);
+        EnableDoctors.removeAllInfornationAboutTables(this);
+        ProtocolsFilter.removeAllInfornationAboutTables(this);
+        Patients.removeAllInfornationAboutTables(this);
+        Numbers.removeAllInfornationAboutTables(this);
+        Special.removeAllInfornationAboutTables(this);
+        Doctor.removeAllInfornationAboutTables(this);
+        RLSItem.removeAllInfornationAboutTables(this);
 
     }
 

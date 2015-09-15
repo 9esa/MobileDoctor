@@ -60,6 +60,7 @@ public class SelectDialogWithRequest extends DialogFragment  implements DialogIn
     private Object oRequestValue;
 
     private LoginAccount oLoginAccount;
+    private boolean bFastMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -228,6 +229,10 @@ public class SelectDialogWithRequest extends DialogFragment  implements DialogIn
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (getoCursorAdapter() != null) {
             getoCursorAdapter().swapCursor(data);
+
+//            if(bFastMode){
+//                listViewElements.cli
+//            }
         }
     }
 
@@ -258,6 +263,11 @@ public class SelectDialogWithRequest extends DialogFragment  implements DialogIn
     private void initLoadListFromDataBase() {
         Bundle oBundle = new Bundle();
         getLoaderManager().restartLoader(0, oBundle, this);
+    }
+
+    public void setbFastMode(boolean bFastMode) {
+
+        this.bFastMode = bFastMode;
     }
 
 

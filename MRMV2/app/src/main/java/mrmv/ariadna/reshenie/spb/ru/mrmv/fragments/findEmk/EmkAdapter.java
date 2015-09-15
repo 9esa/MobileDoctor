@@ -41,7 +41,7 @@ public class EmkAdapter extends CursorAdapter {
     public void bindView(View oCurrentView, Context context, Cursor cursor) {
 
         String sId = "", sName = "", sSecondName = "",
-                sThirdName = "", sNumberCard = "", sPhone = "", sAddress =  "", sDateBorn = "";
+                sThirdName = "", sNumberCard = "", sPhone = "", sAddress = "", sDateBorn = "";
 
         MenuHolder menuHolder = (MenuHolder) oCurrentView.getTag();
 
@@ -80,16 +80,16 @@ public class EmkAdapter extends CursorAdapter {
 
     }
 
-    public String isNotNullString(String sValueString){
-            if(sValueString == null){
+    public String isNotNullString(String sValueString) {
+        if (sValueString == null) {
+            return "";
+        } else {
+            if (sValueString.equals("null")) {
                 return "";
-            }else{
-                if(sValueString.equals("null")){
-                    return "";
-                }else{
-                    return sValueString;
-                }
+            } else {
+                return sValueString;
             }
+        }
     }
 
 }

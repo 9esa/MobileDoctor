@@ -93,6 +93,7 @@
                         android:layout_weight="0.5" />
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -101,30 +102,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
                 android:layout_marginLeft="@dimen/padding_right_or_left">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/first_name"
-                        android:id="@+id/tvFirstName"
-                        android:textSize="@dimen/size_of_text_find_emk"
-                        android:layout_weight="0.7" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/etFirstName"
-                        android:layout_weight="0.3" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -146,6 +123,30 @@
                         android:inputType="textPersonName"
                         android:ems="10"
                         android:id="@+id/etSecondName"
+                        android:layout_weight="0.3" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="@string/first_name"
+                        android:id="@+id/tvFirstName"
+                        android:textSize="@dimen/size_of_text_find_emk"
+                        android:layout_weight="0.7" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/etFirstName"
                         android:layout_weight="0.3" />
 
                 </LinearLayout>
@@ -259,7 +260,9 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/all_margin_found_emk"
+        android:layout_marginRight="@dimen/all_margin_found_emk">
 
         <TextView
             android:layout_width="match_parent"
@@ -326,9 +329,45 @@
             android:layout_marginLeft="@dimen/margin_header_emk" />
     </LinearLayout>
 
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lvListOfUsers" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lvListOfUsers" />
+
+        <FrameLayout
+            android:id="@+id/flProgressBarFindEmk"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shadow_color_numbs"
+            android:visibility="gone" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/progressBarFindEmk" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flContainInformationMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shadow_color_numbs"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvInformationMessage"
+                android:layout_gravity="center"
+                android:text="@string/result_is_empty" />
+        </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

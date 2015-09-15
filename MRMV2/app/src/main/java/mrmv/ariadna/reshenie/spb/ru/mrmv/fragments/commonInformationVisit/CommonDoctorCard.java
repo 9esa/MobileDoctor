@@ -2,12 +2,13 @@ package mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.commonInformationVisit;
 
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.Fragment;
-
+import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
@@ -76,6 +77,13 @@ public class CommonDoctorCard extends Fragment{
 
         mTabHost.addTab(mTabHost.newTabSpec("book_visit").setIndicator("Запись на прием"),
                 ChooseDoctorFragment.class, null);
+
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                Log.d("TEst", "Test");
+            }
+        });
 
         return oView;
 

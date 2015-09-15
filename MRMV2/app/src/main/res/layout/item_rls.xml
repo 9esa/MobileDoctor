@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_left_row_item_rls"
+        android:layout_marginRight="@dimen/margin_right_row_item_rls"
+        android:layout_marginTop="@dimen/margin_top_item_fls">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Название препарата:"
+            android:id="@+id/tvTitleProduct"
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/text_zise_of_rls_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tvNameOfProduct"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_left_value"
+            android:textSize="@dimen/text_zise_of_rls_name_product"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_left_row_item_rls"
+        android:layout_marginRight="@dimen/margin_right_row_item_rls"
+        android:layout_marginTop="@dimen/margin_top_item_fls_row">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/latname_of_product"
+            android:id="@+id/tvTitleLatName"
+            android:textStyle="italic"
+            android:textSize="@dimen/text_zise_of_rls_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tvLatName"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_left_value"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_zise_of_rls_main" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_left_row_item_rls"
+        android:layout_marginRight="@dimen/margin_right_row_item_rls"
+        android:layout_marginTop="@dimen/margin_top_item_fls_row" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/active_object"
+            android:id="@+id/tvTitileActiveObject"
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/text_zise_of_rls_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tvActiveObject"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_left_value"
+            android:textSize="@dimen/text_zise_of_rls_main"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_left_row_item_rls"
+        android:layout_marginTop="@dimen/margin_top_item_fls_row"
+        android:layout_marginRight="@dimen/margin_right_row_item_rls">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/title_form_exite"
+                android:id="@+id/tvTitleFormExite"
+                android:textStyle="italic"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvFormExite"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_left_value"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:layout_marginLeft="@dimen/margin_left_columt_item_rls">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/title_dosage_exite"
+                android:id="@+id/tvTitleDosage"
+                android:textStyle="italic"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvDosage"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_left_value"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_left_row_item_rls"
+        android:layout_marginTop="@dimen/margin_top_item_fls_row"
+        android:layout_marginRight="@dimen/margin_right_row_item_rls">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/title_manufacture_exite"
+                android:id="@+id/tvTitleManufacture"
+                android:textStyle="italic"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvManufacture"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_left_value"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:layout_marginLeft="@dimen/margin_left_columt_item_rls">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/title_country_exite"
+                android:id="@+id/tvTitleCountry"
+                android:textStyle="italic"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvCountry"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_left_value"
+                android:textSize="@dimen/text_size_extra_info_rls" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

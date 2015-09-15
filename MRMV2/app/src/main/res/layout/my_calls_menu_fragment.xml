@@ -4,7 +4,6 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_above="@id/home_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:measureWithLargestChild="false"
@@ -72,7 +71,7 @@
                     android:layout_weight="0.4" />
             </LinearLayout>
 
-            <Button
+            <ImageButton
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
@@ -80,7 +79,8 @@
                 android:id="@+id/update_button"
                 android:layout_weight="0.8"
                 android:textSize="12dp"
-                android:background="#000071e8" />
+                android:background="#000071e8"
+                android:src="@drawable/ic_refresh_black_24dp" />
         </LinearLayout>
 
         <android.support.v4.view.ViewPager

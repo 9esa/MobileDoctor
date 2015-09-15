@@ -85,8 +85,11 @@ public class MapActivity extends Activity implements ICallbackForLoadingMainInfo
         if(sAddressForSearch.equals("-")){
             return;
         }
+//todo Исправить выход за приделы
 
-        sAddressForSearch = sAddressForSearch.substring(0,sAddressForSearch.indexOf(" кв."));
+        if(sAddressForSearch.indexOf(" кв.") > 0){
+            sAddressForSearch = sAddressForSearch.substring(0,sAddressForSearch.indexOf(" кв."));
+        }
 
         String sValueAddressForRequest = "http://maps.google.com/maps/api/geocode/json?address=" +
                 sAddressForSearch + "&sensor=false";

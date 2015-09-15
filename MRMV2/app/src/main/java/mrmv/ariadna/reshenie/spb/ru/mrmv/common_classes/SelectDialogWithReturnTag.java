@@ -13,11 +13,13 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,9 +64,13 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
                     sVisitId, sFormResultId,sFormId, sDate;
 
     private EditText etSearch;
-    private Button btnSearch;
+    private Button btnSearch,  btnCancel;
+
+    private FrameLayout flProgresLoadProtocols, flMessageEmptyDialog;
 
     private ISelectedValue linkCallBack;
+
+    private static int iCurrentLvl;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,28 +89,32 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        Bundle bundle = new Bundle();
 
         if(CURRENT_MODE == SELECT_DIAGNOSIS){
             getDialog().setTitle("МКБ-10");
+            bundle.putInt(ARG_LVL, 1);
+            bundle.putInt(ARG_ROOT_ID, 1);
         }else if (CURRENT_MODE == SELECT_PROTOCOLS){
             getDialog().setTitle("Доступные протоколы");
+            bundle.putInt(ARG_LVL, 1);
+            bundle.putInt(ARG_ROOT_ID, 0);
         }
         getDialog().setCancelable(false);
 
         View oView = inflater.inflate(R.layout.list_for_selection, null);
 
-        Bundle bundle = new Bundle();
+        getAllViewElements(oView);
 
-        if(CURRENT_MODE == SELECT_DIAGNOSIS){
-            bundle.putInt(ARG_LVL, 1);
-            bundle.putInt(ARG_ROOT_ID, 1);
-        }else if (CURRENT_MODE == SELECT_PROTOCOLS){
-            bundle.putInt(ARG_LVL, 1);
-            bundle.putInt(ARG_ROOT_ID, 0);
-        }
-
-        etSearch = (EditText) oView.findViewById(R.id.edit_text_search);
+//        if(CURRENT_MODE == SELECT_DIAGNOSIS){
+//            bundle.putInt(ARG_LVL, 1);
+//            bundle.putInt(ARG_ROOT_ID, 1);
+//        }else if (CURRENT_MODE == SELECT_PROTOCOLS){
+//            bundle.putInt(ARG_LVL, 1);
+//            bundle.putInt(ARG_ROOT_ID, 0);
+//        }
 
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -117,19 +127,12 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
             }
         });
 
-        listViewDiagnoses = (ListView) oView.findViewById(R.id.list_of_diagnoses);
-
-        btnSearch = (Button) oView.findViewById(R.id.btnSelect);
-
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 btnSearchOnClick(view);
             }
         });
-
-
-        Button btnCancel = (Button) oView.findViewById(R.id.btn_cancel_diagnoses);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +153,15 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
         getLoaderManager().restartLoader(0, bundle, this);
 
         return oView;
+    }
+    private void getAllViewElements(View oView) {
+        etSearch = (EditText) oView.findViewById(R.id.edit_text_search);
+        listViewDiagnoses = (ListView) oView.findViewById(R.id.list_of_diagnoses);
+        btnSearch = (Button) oView.findViewById(R.id.btnSelect);
+        btnCancel = (Button) oView.findViewById(R.id.btn_cancel_diagnoses);
+
+        flProgresLoadProtocols = (FrameLayout) oView.findViewById(R.id.flProgresLoadProtocols);
+        flMessageEmptyDialog =  (FrameLayout) oView.findViewById(R.id.flMessageEmptyDialog);
     }
 
     public void btnSearchOnClick(View view) {
@@ -309,6 +321,10 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
 
         if (bundleArgs != null) {
 
+            listViewDiagnoses.setVisibility(View.GONE);
+            flProgresLoadProtocols.setVisibility(View.VISIBLE);
+            flProgresLoadProtocols.bringToFront();
+
             int iSourceLevel = bundleArgs.getInt(ARG_LVL);
             int iRootId = bundleArgs.getInt(ARG_ROOT_ID);
             String sValueForSearch = bundleArgs.getString(ARG_TEXT_FOR_SEARCH);
@@ -323,6 +339,8 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
                 return new CursorLoaderForDialogs(getActivity(), oDataBaseHelper, sValueForSearch);
             }
 
+
+
         } else {
             return null;
         }
@@ -331,20 +349,31 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor oCursor) {
 
-        if (data != null) {
+        if (oCursor != null) {
 
-                if (!((CursorLoaderForDialogs) loader).getsValueForSearch().isEmpty()) {
-                    adapterMenuDiagnoses.swapCursor(data);
+            flProgresLoadProtocols.setVisibility(View.GONE);
+
+            if (oCursor != null) {
+                if (oCursor.getCount() == 0) {
+                    listViewDiagnoses.setVisibility(View.GONE);
+                    flMessageEmptyDialog.setVisibility(View.VISIBLE);
+                } else {
+                    listViewDiagnoses.setVisibility(View.VISIBLE);
+                    flMessageEmptyDialog.setVisibility(View.GONE);
+                }
+            }
+
+            if (!((CursorLoaderForDialogs) loader).getsValueForSearch().isEmpty()) {
+                    adapterMenuDiagnoses.swapCursor(oCursor);
                     return;
                 }
 
-                if (data.getCount() > 1) {
-
-                    adapterMenuDiagnoses.swapCursor(data);
+                if (oCursor.getCount() > 1 || (iCurrentLvl - 1 ) == 0) {
+                    adapterMenuDiagnoses.swapCursor(oCursor);
                 } else {
-                    linkCallBack.addNewTag(createNewTag(data));
+                    linkCallBack.addNewTag(createNewTag(oCursor));
                     getDialog().dismiss();
                 }
 
@@ -422,6 +451,7 @@ public class SelectDialogWithReturnTag extends DialogFragment implements DialogI
             this.oDataBaseHelper = oDataBaseHelper;
             this.iRootId = iRootId;
             this.iSourceLevel = iSourceLevel;
+            iCurrentLvl = iSourceLevel;
         }
 
         public CursorLoaderForDialogs(Context context, DataBaseHelper oDataBaseHelper, String sValueForSearch) {

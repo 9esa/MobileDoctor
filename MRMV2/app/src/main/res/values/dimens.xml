@@ -39,7 +39,34 @@
     <dimen name="margin_top_numbers_list">5sp</dimen>
     <dimen name="left_padding_login_input">10dp</dimen>
     <dimen name="height_icon_drawer">30sp</dimen>
-    <dimen name="margin_left_and_right_drawer_icon">5sp</dimen>
+    <dimen name="margin_left_bottom_drawer">15sp</dimen>
     <dimen name="margin_top_for_drawer_icon">17sp</dimen>
+    <dimen name="margin_exit_button">10sp</dimen>
+    <dimen name="margin_left">350sp</dimen>
+    <dimen name="margin_right_title_doctor">30sp</dimen>
+    <dimen name="margin_right_refresh_button">30sp</dimen>
+    <dimen name="margin_all_border_documents">5sp</dimen>
+    <dimen name="margin_bottom_save">30sp</dimen>
+    <dimen name="text_size_menu_item">18sp</dimen>
+    <dimen name="margin_top_attention">10sp</dimen>
+    <dimen name="padding_all_attention_message">20sp</dimen>
+
+    <dimen name="all_margin_found_product">10sp</dimen>
+    <dimen name="margin_top_title_sale_name">5sp</dimen>
+    <dimen name="margine_top_title_name_of_group_product">5sp</dimen>
+    <dimen name="text_zise_of_rls">14sp</dimen>
+    <dimen name="margin_left_value">5sp</dimen>
+    <dimen name="margin_left_row_item_rls">5sp</dimen>
+    <dimen name="margin_right_row_item_rls">5sp</dimen>
+    <dimen name="margin_top_item_fls">5sp</dimen>
+    <dimen name="margin_top_item_fls_row">2sp</dimen>
+    <dimen name="margin_left_columt_item_rls">5sp</dimen>
+    <dimen name="text_zise_of_rls_main">14sp</dimen>
+    <dimen name="text_zise_of_rls_name_product">16sp</dimen>
+    <dimen name="text_size_extra_info_rls">12sp</dimen>
+    <dimen name="margin_left_and_right_item_rls">5sp</dimen>
+    <dimen name="margin_top_rls">3sp</dimen>
+    <dimen name="margin_top_list_of_diagnoses">15sp</dimen>
+    <dimen name="margin_left_add_new_protocols">5sp</dimen>
 
 </resources>

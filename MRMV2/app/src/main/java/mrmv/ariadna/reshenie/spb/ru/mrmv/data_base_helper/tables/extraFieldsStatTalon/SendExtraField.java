@@ -18,6 +18,7 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.send_information.AsyncSe
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.send_information.ICallbackForSendingMainInformation;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.DataBaseHelper;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.CommonMainLoading;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.FullFieldProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.ItemProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.StructureFullFieldProtocols;
 
@@ -81,15 +82,23 @@ public class SendExtraField implements ICallbackForSendingMainInformation {
 
     }
 
-    public void startDelete(String sValue){
+    public void startDelete(String sFormResultId, String sVisitId){
 
-        String sValueAddressForRequest = "http://"+ sAddress +"/doctor-web/api/housevisit/protocol/" + sValue;
-        AsyncDeletingInformation deletingInfromation = new AsyncDeletingInformation(this, sValueDelete);
-        deletingInfromation.setsCurrentToken(oLoginAccount.getsToken());
-        deletingInfromation.setsRequest(sValueAddressForRequest);
-        deletingInfromation.setDaemon(true);
-        deletingInfromation.start();
+        if(sFormResultId == null){
+            return;
+        }
 
+        if(FullFieldProtocols.getInformationAboutFullFieldProtocolByVisitAndForm(sqlHelper, sVisitId, sFormResultId)){
+             return;
+        }else{
+            String sValueAddressForRequest = "http://"+ sAddress +"/doctor-web/api/housevisit/protocol/" + sFormResultId;
+            AsyncDeletingInformation deletingInfromation = new AsyncDeletingInformation(this, sValueDelete);
+            deletingInfromation.setsCurrentToken(oLoginAccount.getsToken());
+            deletingInfromation.setsRequest(sValueAddressForRequest);
+            deletingInfromation.setDaemon(true);
+            deletingInfromation.start();
+
+        }
     }
 
 

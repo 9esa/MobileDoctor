@@ -8,6 +8,7 @@ import java.util.List;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.DataBaseHelper;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.actionMedicalGuides.ItemGuides;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.ItemProtocols;
 
 /**
  * Created by kirichenko on 26.05.2015.
@@ -40,8 +41,14 @@ public class ExtraFieldStatTalon {
         db.execSQL(selectQuery);
     }
 
+    public static void removeInfornationViaFormItemId(DataBaseHelper dbHelper, String sFormItemId){
 
-    public static List<ItemGuides> getLabelExtraFieldStatTalon(DataBaseHelper dbHelper, String sFormId){
+        String selectQuery = "DELETE FROM " + TABLE_NAME + " WHERE " + FORMID + " = " + sFormItemId;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL(selectQuery);
+    }
+
+    public static List<ItemGuides> getLabelExtraFieldStatTalon(DataBaseHelper dbHelper, String sFormId, ItemProtocols oItemProtocols){
 
         List<ItemGuides> oItemsGuides = new ArrayList<ItemGuides>();
 
@@ -50,19 +57,22 @@ public class ExtraFieldStatTalon {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        ItemGuides oItemGuide;// = new ItemGuides();
+        ItemGuides oItemGuide = new ItemGuides();
 
-//        oItemGuide.setsIdGuides("");
-//        oItemGuide.setsCode("");
-//        oItemGuide.setsText("-");
-//        oItemGuide.setsShortText("-");
-//        oItemGuide.setsTag(sFormId);
-//        oItemGuide.setsIsDefault("0");
-//        oItemsGuides.add(oItemGuide);
+        oItemGuide.setsIdGuides("");
+        oItemGuide.setsCode("");
+        oItemGuide.setsText("");
+        oItemGuide.setsShortText("");
+        oItemGuide.setsTag(sFormId);
+        oItemGuide.setsIsDefault("0");
+        oItemsGuides.add(oItemGuide);
 
         if (cursor.moveToFirst()) {
             do {
                 oItemGuide = new ItemGuides();
+                if(oItemProtocols != null){
+                    oItemGuide.setsMultiValue(oItemProtocols.getsIsmulti());
+                }
                 oItemGuide.setsIdGuides(cursor.getString(cursor.getColumnIndex(ID)));
                 oItemGuide.setsCode(cursor.getString(cursor.getColumnIndex(CODE)));
                 oItemGuide.setsText(cursor.getString(cursor.getColumnIndex(TEXT)));

@@ -5,10 +5,19 @@
     android:paddingLeft="10dp"
     android:paddingTop="10dp">
 
+    <Space
+        android:layout_width="20px"
+        android:layout_height="10sp" />
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton2"
         android:src="@drawable/ariadna_logo_full"
-        android:background="#00fbfbfb" />
+        android:background="#00fbfbfb"
+        android:layout_marginLeft="@dimen/margin_left_bottom_drawer" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="10sp" />
 </LinearLayout>

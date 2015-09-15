@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/margin_top_numbers_list">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enable_documents"
+        android:id="@+id/textView12"
+        android:layout_gravity="center_horizontal" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRefreshDocuments"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_refresh_black_24dp"
+        android:background="#0081ff90"
+        android:layout_marginRight="@dimen/margin_right_refresh_button" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvElementsOfEnableDocuments"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_all_border_documents" />
+</LinearLayout>

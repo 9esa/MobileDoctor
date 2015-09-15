@@ -12,9 +12,18 @@ public class ItemGuides {
         private String sShortText;
         private String sTag;
         private String sIsDefault;
+        private String sMultiValue = "0";
 
     public String getsIsDefault() {
         return sIsDefault;
+    }
+
+    public String getsMultiValue() {
+        return sMultiValue;
+    }
+
+    public void setsMultiValue(String sMultiValue) {
+        this.sMultiValue = sMultiValue;
     }
 
     public void setsIsDefault(String sIsDefault) {

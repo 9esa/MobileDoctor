@@ -23,7 +23,6 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.ILoginEnableAccess;
  */
 public class LoadMedicalGuides extends CommonMainLoading implements ICallbackForLoadingMainInformation {
 
-
     /**
      * Информация о логине
      */

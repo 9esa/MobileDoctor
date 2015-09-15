@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="?attr/colorPrimary">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.52"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Название меню"
+                    android:id="@+id/tvNameOfMenu"
+                    android:textColor="#fbfbfb"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_menu_item" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.52"
+                android:layout_marginRight="@dimen/margin_right_title_doctor">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Имя пользователя"
+                    android:id="@+id/user_name"
+                    android:layout_gravity="right"
+                    android:textSize="15dp"
+                    android:textColor="#fbfbfb" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Название медецинского учереждения"
+                    android:id="@+id/name_departament"
+                    android:layout_gravity="right"
+                    android:textSize="15dp"
+                    android:textColor="#fbfbfb" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.92"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="40sp"
+                    android:id="@+id/exite_button"
+                    android:background="@drawable/ic_exit_to_app_white_48dp"
+                    android:textColor="#fffbfbfb"
+                    android:paddingLeft="@dimen/padding_save_button"
+                    android:paddingRight="@dimen/padding_save_button"
+                    android:layout_marginRight="@dimen/margin_exit_button"
+                    android:gravity="center_vertical|center_horizontal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+    </FrameLayout>
+
+</RelativeLayout>

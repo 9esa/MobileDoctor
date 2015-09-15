@@ -10,9 +10,11 @@ import android.util.Log;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.DataBaseHelper;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.ICommonLoadComplete;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.diagnoseAction.SendDiagnose;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.extraFieldsStatTalon.SendExtraField;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.mesAction.SendMes;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.numbers.SendNumbers;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.SendProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.visitAction.SendVisit;
 
@@ -77,13 +79,18 @@ public class ServiceSending extends Service {
         new SendDiagnose(this,oLoginAccount, oDataBaseHelper,  getAddressForRequest()).startSend(sVisitId);
     }
 
-    public void startDeleteInformationaAboutProtocols(LoginAccount oLoginAccount, String sFormResultId) {
-        new SendExtraField(this,oLoginAccount, oDataBaseHelper, getAddressForRequest()).startDelete(sFormResultId);
+    public void startDeleteInformationaAboutProtocols(LoginAccount oLoginAccount, String sFormResultId, String sVisitId) {
+        new SendExtraField(this,oLoginAccount, oDataBaseHelper, getAddressForRequest()).startDelete(sFormResultId, sVisitId);
     }
 
     public void startSendingInformationaAboutProtocols(LoginAccount oLoginAccount, String sVisitId,String sId, String sFormId, String sFormResultId){
         new SendProtocols(this,oLoginAccount, oDataBaseHelper,  getAddressForRequest()).startSendValueProtocols(sId, sVisitId, sFormId, sFormResultId);
     }
+
+    public void startSendingInformationaAboutBookingNumb(LoginAccount oLoginAccount, ICommonLoadComplete iLoadedCompleteCallBack, String sIdNumber, String sPacientId, String sStatusNumber, String sRequestDate, String sDocDepId ){
+        new SendNumbers(this,oLoginAccount, oDataBaseHelper,  getAddressForRequest()).startRequestToServer(sIdNumber, sPacientId, sStatusNumber, iLoadedCompleteCallBack, sRequestDate, sDocDepId);
+    }
+
 
     @Override
     public IBinder onBind(Intent intent) {

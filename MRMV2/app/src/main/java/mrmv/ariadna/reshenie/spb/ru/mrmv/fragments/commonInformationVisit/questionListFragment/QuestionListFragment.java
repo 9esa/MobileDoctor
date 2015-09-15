@@ -89,6 +89,8 @@ public class QuestionListFragment extends Fragment implements ICommonLoadComplet
     private Button btnSaveProtocols;
     private ImageButton btnCreate;
 
+    private boolean bIsNewValue = false;
+
     private DataBaseHelper oDataBaseHelper;
 
     private ISelectedValue ISelectedValue;
@@ -146,6 +148,9 @@ public class QuestionListFragment extends Fragment implements ICommonLoadComplet
 
             @Override
             public void onClick(View view) {
+
+                bIsNewValue = true;
+
                 saveFullFieldProtocol();
                 SelectDialogWithReturnTag dialogFragment = new SelectDialogWithReturnTag();
                 dialogFragment.setLinkCallBack(ISelectedValue);
@@ -312,7 +317,7 @@ public class QuestionListFragment extends Fragment implements ICommonLoadComplet
 
                    getForIdAndResultId();
 
-                   oServiceTransfer.startDeleteInformationaAboutProtocols(oLoginAccount, sFormResultId);
+                   oServiceTransfer.startDeleteInformationaAboutProtocols(oLoginAccount, sFormResultId, sVisitId);
 
                    listProtocols.clear();
 
@@ -402,10 +407,10 @@ public class QuestionListFragment extends Fragment implements ICommonLoadComplet
         ConstructViewProtocols.cleanAllElements();
 
         for (ItemProtocols oItemProtocols : listItemProtocols) {
-            View newCustomView = ConstructViewProtocols.constructNewRow(paneToAddQuestion, getActivity(), oItemProtocols, oDataBaseHelper);
+            View newCustomView = ConstructViewProtocols.constructNewRow(paneToAddQuestion, getActivity(), oItemProtocols, oDataBaseHelper, bIsNewValue);
             listProtocols.add(newCustomView);
         }
-
+        bIsNewValue = false;
         ConstructViewProtocols.setSpinnerListeners();
     }
 

@@ -70,7 +70,7 @@ public class LauncherActivity extends Activity implements Observer {
             android.app.FragmentManager fragmentManager = getFragmentManager();
 
             fragmentManager.beginTransaction()
-                    .add(R.id.space_for_frame, oLoginFragment)
+                    .add(R.id.space_for_frame, oLoginFragment,"loginFragment")
                     .addToBackStack("fragmentStack")
                     .commit();
 

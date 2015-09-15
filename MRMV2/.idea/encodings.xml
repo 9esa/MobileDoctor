@@ -2,7 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/mrmv/ariadna/reshenie/spb/ru/mrmv/common_classes/load_infromation/AsyncLoadingInformation.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/mrmv/ariadna/reshenie/spb/ru/mrmv/fragments/appointment/AppointmentFragment.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/mrmv/ariadna/reshenie/spb/ru/mrmv/fragments/appointment/AppointmentAdapter.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/mrmv/ariadna/reshenie/spb/ru/mrmv/fragments/appointment/AppointmentFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/mrmv/ariadna/reshenie/spb/ru/mrmv/fragments/appointment/ChooseDoctorFragment.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/mrmv/ariadna/reshenie/spb/ru/mrmv/fragments/findEmk/EmkAdapter.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/mrmv/ariadna/reshenie/spb/ru/mrmv/fragments/findEmk/FindEmkFragment.java" charset="windows-1251" />

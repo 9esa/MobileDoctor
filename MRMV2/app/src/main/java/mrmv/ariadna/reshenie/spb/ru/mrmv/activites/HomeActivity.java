@@ -1,31 +1,33 @@
 package mrmv.ariadna.reshenie.spb.ru.mrmv.activites;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+
 import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
-import mrmv.ariadna.reshenie.spb.ru.mrmv.drawerMenu.AdapterMenuItem;
-import mrmv.ariadna.reshenie.spb.ru.mrmv.drawerMenu.MenuItem;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.attention.AttentionFragment;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.bookRLS.BookRLSFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.documentation.DocumentationFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.findEmk.FindEmkFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.myCalls.MyCallsMenuFragmet;
@@ -39,20 +41,9 @@ public class HomeActivity extends FragmentActivity {
 
     private TextView tvUserName;
     private TextView tvNameDepartment;
-    private TextView tvNameSelectedMenu;
+    private static TextView tvNameOfMenu;
 
-    private DrawerLayout dlSlideMenu;
-
-    private FrameLayout flMainActiveLayout;
-    private FrameLayout flCommonMainLayout;
-
-    private LinearLayout llHomeToolBar;
-
-    private LoginAccount oLoginAccount;
-
-    private ListView lvListDrawer;
-
-    private ImageButton route_menu_button;
+    private static LoginAccount oLoginAccount;
 
     public final static String BROADCAST_ACTION_TAKING_INFORMATION = "mrmv.ariadna.reshenie.spb.ru.mrmv.activites.action_complite";
     public final static String MESSAGE_TO_VIEW = "message";
@@ -70,6 +61,10 @@ public class HomeActivity extends FragmentActivity {
 
     public static String KEY_FOR_GET_MODE = "key_for_get_mode";
 
+    private Drawer.Result drawerResult = null;
+
+    private static Toolbar toolbar;
+
     public BroadcastReceiver oBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -81,7 +76,17 @@ public class HomeActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar.setLogoDescription("Doctor");
+
+        drawerResult = createCommonDrawer(HomeActivity.this, toolbar);
+        drawerResult.setSelectionByIdentifier(1, false); // Set proper selection
+
+        // Покажем drawer автоматически при запуске
+        //drawerResult.openDrawer();
 
         /*
             Получение всех объектов на view должно быть полученно сразу
@@ -103,23 +108,20 @@ public class HomeActivity extends FragmentActivity {
             }
         }
 
-        /*
-         * Временный выбор мои вызовы
-         */
+
         MyCallsMenuFragmet oMyCallsMenuFragmet = new MyCallsMenuFragmet();
-        oMyCallsMenuFragmet.setLogin(oLoginAccount);
+        oMyCallsMenuFragmet.setLogin(getoLoginAccount());
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
-                .replace(R.id.main_active_layout, oMyCallsMenuFragmet)
+                .replace(R.id.frame_container, oMyCallsMenuFragmet,"meCallsMenu")
                 .addToBackStack("fragmentStack")
                 .commit();
 
-        loadMenuDrawer();
-
+        tvNameOfMenu.setText(R.string.section_my_calls);
     }
 
-    public LoginAccount getoLoginAccount() {
+    public static LoginAccount getoLoginAccount() {
         return oLoginAccount;
     }
 
@@ -140,12 +142,32 @@ public class HomeActivity extends FragmentActivity {
             fragmentManager = getSupportFragmentManager();
 
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_active_layout, oMyCallsMenuFragmet)
+                    .replace(R.id.frame_container, oMyCallsMenuFragmet)
                     .addToBackStack("fragmentStack")
                     .commit();
         } else {
-            finish();
+            dialogConfirmClose();
         }
+    }
+
+    private void dialogConfirmClose(){
+        AlertDialog.Builder alerDialog = new AlertDialog.Builder(this);
+        alerDialog.setTitle("Подтверждение выхода");  // заголовок
+        alerDialog.setMessage("Вы действительно хотите закрыть приложение?"); // сообщение
+
+        alerDialog.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+                finish();
+            }
+        });
+
+        alerDialog.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int arg1) {
+
+            }
+        });
+        alerDialog.setCancelable(false);
+        alerDialog.show();
     }
 
     private void onPushExite() {
@@ -155,17 +177,12 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void getAllViewObject() {
-        // vpMyCalls = (ViewPager) findViewById(R.id.viewpager);
+
         bExite = (Button) findViewById(R.id.exite_button);
         tvUserName = (TextView) findViewById(R.id.user_name);
         tvNameDepartment = (TextView) findViewById(R.id.name_departament);
-        dlSlideMenu = (DrawerLayout) findViewById(R.id.drawer_layout);
-        flMainActiveLayout = (FrameLayout) findViewById(R.id.main_active_layout);
-        flCommonMainLayout = (FrameLayout) findViewById(R.id.common_home_layout);
-        llHomeToolBar = (LinearLayout) findViewById(R.id.home_toolbar);
-        tvNameSelectedMenu = (TextView) findViewById(R.id.selected_menu_header);
+        tvNameOfMenu = (TextView) findViewById(R.id.tvNameOfMenu);
 
-        route_menu_button = (ImageButton) findViewById(R.id.route_menu_button);
     }
 
 
@@ -174,145 +191,6 @@ public class HomeActivity extends FragmentActivity {
         this.oLoginAccount = oLoginAccount;
         tvUserName.setText(oLoginAccount.getsValueName());
         tvNameDepartment.setText(oLoginAccount.getsValueDepName());
-    }
-
-    /**
-     * Загрузка боковой меню боковой панели
-     */
-    private void loadMenuDrawer() {
-        final MenuItem oMenuItemList[] = new MenuItem[]
-                {
-                        new MenuItem(R.drawable.my_calls_menu, getResources().getString(R.string.section_my_calls)),
-                        new MenuItem(R.drawable.emk_search, getResources().getString(R.string.section_emk)),
-                        new MenuItem(R.drawable.docs, getResources().getString(R.string.section_documentation)),
-                        new MenuItem(R.drawable.drugs, getResources().getString(R.string.section_rls)),
-                        new MenuItem(R.drawable.medhelp, getResources().getString(R.string.section_health_care)),
-                        new MenuItem(R.drawable.write, getResources().getString(R.string.section_arrange_to_visit)),
-                        new MenuItem(R.drawable.reanim, getResources().getString(R.string.section_reanimation)),
-                        new MenuItem(R.drawable.danger, getResources().getString(R.string.section_danger)),
-                        new MenuItem(R.drawable.map, getResources().getString(R.string.section_pharmacies))
-                };
-
-        AdapterMenuItem adapter = new AdapterMenuItem(this,
-                R.layout.element_of_list_drawer, oMenuItemList);
-
-        lvListDrawer = (ListView) findViewById(R.id.left_drawer);
-        lvListDrawer.addHeaderView(createHeader());
-        lvListDrawer.addFooterView(createFooter());
-        lvListDrawer.setAdapter(adapter);
-
-        //Типо выбрали мои вызовы =)
-        tvNameSelectedMenu.setText(oMenuItemList[0].getTitle());
-
-        lvListDrawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                Bundle bundle = new Bundle();
-
-                if(position > 0){
-                    tvNameSelectedMenu.setText(oMenuItemList[position - 1].getTitle());
-
-                    if ((position - 1) == MY_CALLS_MODE) {
-
-                        MyCallsMenuFragmet oMyCallsMenuFragmet = new MyCallsMenuFragmet();
-                        oMyCallsMenuFragmet.setLogin(oLoginAccount);
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.main_active_layout, oMyCallsMenuFragmet)
-                                .addToBackStack("fragmentStack")
-                                .commit();
-
-                    } else if ((position - 1) == FIND_EMK || (position - 1) == BOOKING_VISIT) {
-
-                        if((position - 1) == FIND_EMK){
-                            bundle.putInt(KEY_FOR_GET_MODE, FIND_EMK);
-                        }else{
-                            bundle.putInt(KEY_FOR_GET_MODE, BOOKING_VISIT);
-                        }
-
-                        FindEmkFragment oFindEmkFragment = new FindEmkFragment();
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-
-                        oFindEmkFragment.setoLoginAccount(getoLoginAccount());
-
-                        oFindEmkFragment.setArguments(bundle);
-
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.main_active_layout, oFindEmkFragment)
-                                .addToBackStack("fragmentStack")
-                                .commit();
-
-                    } else  if ((position - 1) == DOCUMENTATION) {
-
-                        DocumentationFragment oAppointmentFragment = new DocumentationFragment();
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.main_active_layout, oAppointmentFragment)
-                                .addToBackStack("fragmentStack")
-                                .commit();
-
-
-
-                    }
-                }else if(position == 0){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            dlSlideMenu.closeDrawers();
-                        }
-                    });
-                }
-            }
-        });
-
-        dlSlideMenu.setDrawerListener(new RightMenuListener(dlSlideMenu));
-
-
-        route_menu_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        dlSlideMenu.openDrawer(lvListDrawer);
-                    }
-                });
-            }
-        });
-
-
-//        dlSlideMenu.setOnTouchListener(new View.OnTouchListener() {
-//            public boolean onTouch(View view, MotionEvent e) {
-//                flCommonMainLayout.bringChildToFront(dlSlideMenu);
-//                return false;
-//            }
-//        });
-
-    }
-
-    /**
-     * Cоздание (Заголовка)
-     *
-     * @return
-     */
-    View createHeader() {
-        View oLocalView = getLayoutInflater().inflate(R.layout.header_drawer, null);
-
-        ImageView ivMenu = (ImageView) oLocalView.findViewById(R.id.iv_menu_item);
-
-        ivMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("tets", "sdcdcsc");
-                //dlSlideMenu.openDrawer(1);
-            }
-        });
-
-        return oLocalView;
     }
 
     @Override
@@ -328,59 +206,20 @@ public class HomeActivity extends FragmentActivity {
         super.onPause();
     }
 
-    // создание Footer (Логотипа)
-    View createFooter() {
-        View v = getLayoutInflater().inflate(R.layout.footer_drawer, null);
-        return v;
-    }
-
-
-    private class RightMenuListener implements android.support.v4.widget.DrawerLayout.DrawerListener {
-
-        private DrawerLayout drawer;
-
-        public RightMenuListener(DrawerLayout drawer) {
-            this.drawer = drawer;
-        }
-
-        @Override
-        public void onDrawerSlide(View drawerView, float slideOffset) {
-            Log.d("TEST", "onDrawerSlide " + slideOffset);
-
-            if (slideOffset > 0.2) {
-                flCommonMainLayout.bringChildToFront(dlSlideMenu);
-                dlSlideMenu.bringToFront();
-            } else {
-                flCommonMainLayout.bringChildToFront(llHomeToolBar);
-                llHomeToolBar.bringToFront();
-            }
-        }
-
-        @Override
-        public void onDrawerOpened(View drawerView) {
-            Log.d("TEST", "onDrawerOpened");
-        }
-
-        @Override
-        public void onDrawerClosed(View view) {
-            //drawer.setVisibility(View.INVISIBLE);
-            Log.d("TEST", "onDrawerClosed");
-            // flMainActiveLayout.bringToFront();
-            //flMainActiveLayout.bringToFront();
-        }
-
-        @Override
-        public void onDrawerStateChanged(int newState) {
-            Log.d("TEST", "  " + newState);
-
-        }
-
-    }
-
     public void do_open_settings(android.view.MenuItem item){
 
         Intent oIntentStartHomeActivity = new Intent(this, AppPreferenceActivity.class);
         startActivity(oIntentStartHomeActivity);
+    }
+
+
+    public static void hideSoftKeyboard(Activity activity) {
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+            //
+        }
 
     }
 
@@ -390,20 +229,146 @@ public class HomeActivity extends FragmentActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
-//
-//    private void registerBroadcastReceiver(){
-//
-//        /*
-//            Добавляем интент фильтр
-//         */
-//        IntentFilter oIntentFilter = new IntentFilter(BROADCAST_ACTION_TAKING_INFORMATION);
-//        /*
-//            Регестрируем наш приемник
-//         */
-//
-//        registerReceiver(oBroadcastReceiver, oIntentFilter);
-//
-//    }
 
+    public static Drawer.OnDrawerItemClickListener handlerOnClick(final Drawer.Result drawerResult, final FragmentActivity activity) {
+        return new Drawer.OnDrawerItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+
+                if (drawerItem != null) {
+
+                    if (drawerItem.getIdentifier() == 1) {
+                        MyCallsMenuFragmet oMyCallsMenuFragmet = new MyCallsMenuFragmet();
+                        oMyCallsMenuFragmet.setLogin(getoLoginAccount());
+                        FragmentManager fragmentManager = activity. getSupportFragmentManager();
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.frame_container, oMyCallsMenuFragmet)
+                                .addToBackStack("fragmentStack")
+                                .commit();
+
+                        tvNameOfMenu.setText(R.string.section_my_calls);
+                        //  activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Fragment1()).commit();
+                    } else if (drawerItem.getIdentifier() == 2) {
+                        //    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new Fragment2()).commit();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(KEY_FOR_GET_MODE, FIND_EMK);
+
+                        FindEmkFragment oFindEmkFragment = new FindEmkFragment();
+                        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+                        oFindEmkFragment.setoLoginAccount(getoLoginAccount());
+
+                        oFindEmkFragment.setArguments(bundle);
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.frame_container, oFindEmkFragment)
+                                .addToBackStack("fragmentStack")
+                                .commit();
+
+
+                        tvNameOfMenu.setText(R.string.section_emk);
+                    } else if (drawerItem.getIdentifier() == 3) {
+
+                        DocumentationFragment oAppointmentFragment = new DocumentationFragment();
+                        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.frame_container, oAppointmentFragment)
+                                .addToBackStack("fragmentStack")
+                                .commit();
+
+                        tvNameOfMenu.setText(R.string.section_documentation);
+                    } else if (drawerItem.getIdentifier() == 4) {
+
+                        BookRLSFragment oBookRLSFragment = new BookRLSFragment();
+                        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                        oBookRLSFragment.setoLoginAccount(getoLoginAccount());
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.frame_container, oBookRLSFragment)
+                                .addToBackStack("fragmentStack")
+                                .commit();
+
+                        tvNameOfMenu.setText(R.string.section_rls);
+                    }else if (drawerItem.getIdentifier() == 5) {
+
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(KEY_FOR_GET_MODE, BOOKING_VISIT);
+
+                        FindEmkFragment oFindEmkFragment = new FindEmkFragment();
+                        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+                        oFindEmkFragment.setoLoginAccount(getoLoginAccount());
+
+                        oFindEmkFragment.setArguments(bundle);
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.frame_container, oFindEmkFragment)
+                                .addToBackStack("fragmentStack")
+                                .commit();
+
+                        tvNameOfMenu.setText(R.string.section_arrange_to_visit);
+                    }else if (drawerItem.getIdentifier() == 6) {
+
+                        AttentionFragment oAttentionFragment = new AttentionFragment();
+                        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.frame_container, oAttentionFragment)
+                                .addToBackStack("fragmentStack")
+                                .commit();
+
+                        tvNameOfMenu.setText(R.string.section_danger);
+                    }else if (drawerItem.getIdentifier() == 7) {
+
+                        tvNameOfMenu.setText(R.string.section_pharmacies);
+                    }
+                }
+            }
+        };
+    }
+
+    public static Drawer.Result createCommonDrawer(final FragmentActivity activity, Toolbar toolbar) {
+
+        Drawer.Result drawerResult = new Drawer()
+                .withActivity(activity)
+                .withHeader(R.layout.drawer_header)
+                .withFooter(R.layout.footer_drawer)
+                .withToolbar(toolbar)
+                .addDrawerItems(
+
+                        new PrimaryDrawerItem().withName(R.string.section_my_calls).withIcon(R.drawable.my_calls_menu_selected).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.section_emk).withIcon(R.drawable.emk_search_selected).withIdentifier(2),
+                        new PrimaryDrawerItem().withName(R.string.section_documentation).withIcon(R.drawable.docs_selected).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.section_rls).withIcon(R.drawable.drugs_selected).withIdentifier(4),
+                        new PrimaryDrawerItem().withName(R.string.section_arrange_to_visit).withIcon(R.drawable.write_selected).withIdentifier(5),
+                        new PrimaryDrawerItem().withName(R.string.section_danger).withIcon(R.drawable.danger_selected).withIdentifier(6),
+                        new PrimaryDrawerItem().withName(R.string.section_pharmacies).withIcon(R.drawable.map_selected).withIdentifier(7)
+                )
+                .withOnDrawerListener(new Drawer.OnDrawerListener() {
+                    @Override
+                    public boolean equals(Object o) {
+                        return super.equals(o);
+                    }
+
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        //Toast.makeText(MainActivity.this, "onDrawerOpened", Toast.LENGTH_SHORT).show();
+                        hideSoftKeyboard(activity);
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        //Toast.makeText(MainActivity.this, "onDrawerClosed", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build();
+
+
+        drawerResult.setOnDrawerItemClickListener(handlerOnClick(drawerResult, activity));
+
+        return drawerResult;
+    }
 
 }

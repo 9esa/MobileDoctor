@@ -39,7 +39,7 @@ public class AppPreferenceActivity extends PreferenceActivity implements OnShare
 
     private Preference btnSync, btnUpdate;
 
-    private EditTextPreference edtTimeOut;
+    private EditTextPreference edtTimeOut, edtMaxValuePacient;
 
     private EditTextPreference edtAddressServers;
 
@@ -93,7 +93,9 @@ public class AppPreferenceActivity extends PreferenceActivity implements OnShare
         edtAddressServers.setSummary(edtAddressServers.getText());
 
         edtTimeOut = (EditTextPreference)findPreference(getResources().getString(R.string.timeout_for_update_guides));
+        edtMaxValuePacient = (EditTextPreference) findPreference(getResources().getString(R.string.max_value_for_view_users));
 
+        edtMaxValuePacient.setSummary(edtMaxValuePacient.getText());
         edtTimeOut.setSummary(edtTimeOut.getText() + " мин.");
 
 
@@ -176,6 +178,10 @@ public class AppPreferenceActivity extends PreferenceActivity implements OnShare
 
         if (sKeyValue.equals(getResources().getString(R.string.timeout_for_update_guides))) {
             edtTimeOut.setSummary(edtTimeOut.getText() + " мин.");
+
+        }else if(sKeyValue.equals(getResources().getString(R.string.max_value_for_view_users))){
+            edtMaxValuePacient.setSummary(edtMaxValuePacient.getText());
+
         }else if(sKeyValue.equals(getResources().getString(R.string.address_connection))){
             edtAddressServers.setSummary(edtAddressServers.getText());
 
@@ -277,7 +283,9 @@ public class AppPreferenceActivity extends PreferenceActivity implements OnShare
     public void enableAccessLoadFinished(LoginAccount oLoginAccount) {
         iCountRequestToServer--;
 
-        nDialog.incrementProgressBy(1);
+        if(nDialog != null){
+            nDialog.incrementProgressBy(1);
+        }
 
         //Говорит о том что мы все скачали и доступ разрешен
         if(iCountRequestToServer == 0){

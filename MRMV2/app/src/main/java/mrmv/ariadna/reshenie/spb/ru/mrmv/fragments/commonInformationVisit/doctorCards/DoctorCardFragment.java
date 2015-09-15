@@ -198,6 +198,12 @@ public class DoctorCardFragment extends CommonFragment implements ILoadedComlete
             @Override
             public void onClick(View view) {
                 clickSaveVisit();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.space_for_doctor_cards, oDiagnosisFragment)
+                        .commit();
+
             }
         });
 
@@ -567,7 +573,7 @@ public class DoctorCardFragment extends CommonFragment implements ILoadedComlete
         setListItemProtocols(StructureFullFieldProtocols.getListEnableProtocols(oDataBaseHelper, sVisitID));
 
         for (ItemProtocols oItemProtocols : getListItemProtocols()) {
-            View newCustomView = ConstructViewProtocols.constructNewRow(tlExtraView, getActivity(), oItemProtocols, oDataBaseHelper);
+            View newCustomView = ConstructViewProtocols.constructNewRow(tlExtraView, getActivity(), oItemProtocols, oDataBaseHelper, false);
             listExtraView.add(newCustomView);
         }
 

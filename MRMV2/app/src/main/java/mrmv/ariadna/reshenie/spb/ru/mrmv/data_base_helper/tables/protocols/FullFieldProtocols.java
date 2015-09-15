@@ -105,6 +105,20 @@ public class FullFieldProtocols {
         return cursor;
     }
 
+    public static boolean getInformationAboutFullFieldProtocolByVisitAndForm(DataBaseHelper dbHelper, String sIdVisit, String sFormId){
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE " + VISITID + "=" + sIdVisit + " AND " + FORMID + " = " + sFormId;
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.moveToNext()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static void removeInfornationAboutFormId(DataBaseHelper dbHelper, String sId){
 
         String selectQuery = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + " = " + sId;

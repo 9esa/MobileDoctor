@@ -18,6 +18,7 @@ public class Numbers {
     final public static String TIME = "time";
     final public static String STATUS = "status";
     final public static String DATE = "date";
+    final public static String PATIENTID = "patientId";
 
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE "
             + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -25,7 +26,8 @@ public class Numbers {
             + IDDOCTOR + " VARCHAR(255),"
             + TIME + " VARCHAR(255),"
             + STATUS + " VARCHAR(255),"
-            + DATE + " VARCHAR(255));";
+            + DATE + " VARCHAR(255),"
+            + PATIENTID + " VARCHAR(255));";
 
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS "
             + TABLE_NAME;

@@ -80,6 +80,8 @@ public class SendProtocols implements ICallbackForSendingMainInformation {
             sValueAddressForRequest = "http://"+ sAddress +"/doctor-web/api/housevisit/protocol/" + sFormResultId+ "/formitems" ;
        }
 
+
+
         AsyncSendingInformation sendingInfromation = new AsyncSendingInformation(this, sId);
         sendingInfromation.setsCurrentToken(oLoginAccount.getsToken());
         sendingInfromation.setsRequest(sValueAddressForRequest);

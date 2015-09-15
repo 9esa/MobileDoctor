@@ -90,8 +90,8 @@ public class SendDiagnose extends CommonMainLoading implements ICallbackForSendi
             }
         }
 
-
-        Diagnose.removeAllInfornationDiagnosesWithoutMain(sqlHelper);
+     //   Diagnose.updateAllDiagnosesAfterSend(sqlHelper);
+          Diagnose.removeAllInfornationDiagnosesWithoutMain(sqlHelper);
 //        String cleanRequest = "DELETE FROM " + Diagnose.TABLE_NAME;
 //        sqlHelper.getWritableDatabase().execSQL(cleanRequest);
 

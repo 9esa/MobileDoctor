@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
@@ -30,6 +32,8 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.services.ServiceLoading;
 public class ChooseDoctorFragment extends Fragment implements IRouteDialogWithRequest {
 
     private Button btnSaveMe, btnSaveAnother;
+    private FrameLayout flChooseDoctorForSave;
+    private LinearLayout llContainaAsk;
 
     static private LoginAccount oLoginAccount;
 
@@ -140,6 +144,9 @@ public class ChooseDoctorFragment extends Fragment implements IRouteDialogWithRe
         btnSaveMe = (Button) oView.findViewById(R.id.btnCurrentDoctor);
         btnSaveAnother = (Button) oView.findViewById(R.id.btAnotherDoctor);
 
+        flChooseDoctorForSave = (FrameLayout) oView.findViewById(R.id.flChooseDoctorForSave);
+        llContainaAsk = (LinearLayout) oView.findViewById(R.id.llContainaAsk);
+
     }
 
     public String getsIdSpecial() {
@@ -204,13 +211,18 @@ public class ChooseDoctorFragment extends Fragment implements IRouteDialogWithRe
 
         oAppointmentFragment.setoLoginAccount(getoLoginAccount());
 
+        llContainaAsk.setVisibility(View.GONE);
+
         FragmentManager oFragmentManager = getFragmentManager();
         FragmentTransaction oFragmentTransaction =  oFragmentManager.beginTransaction();
 
         /**
          * Должен работать выбор контейнера для вставки, вроде он работает
          */
-        oFragmentTransaction.replace(((ViewGroup) getView().getParent()).getId(), oAppointmentFragment);
+
+        //android.R.id.tabcontent
+        oFragmentTransaction.replace(R.id.flChooseDoctorForSave, oAppointmentFragment);
+        // oFragmentTransaction.replace(((ViewGroup) getView().getParent()).getId(), oAppointmentFragment);
 
         // oFragmentTransaction.replace(R.id.main_active_layout, oAppointmentFragment);
         oFragmentTransaction.addToBackStack("fragmentStack");
@@ -260,7 +272,6 @@ public class ChooseDoctorFragment extends Fragment implements IRouteDialogWithRe
 
                 selectNewDoctor();
             }
-
 
         }else{
 

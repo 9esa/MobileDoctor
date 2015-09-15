@@ -7,13 +7,14 @@ public class ItemEmk {
 
     private Integer iNumberCard;
     private Integer iPhone;
-    private String oDateBorn;
+    private String sDateBorn;
 
     private String sName;
     private String sSecondName;
     private String sThirdName;
-    private Integer iSerialPolice;
-    private Integer iNumberPolice;
+
+    private String sSerialPolice;
+    private String sNumberPolice;
 
     public ItemEmk() {
     }
@@ -34,12 +35,12 @@ public class ItemEmk {
         this.iPhone = iPhone;
     }
 
-    public String getoDateBorn() {
-        return oDateBorn;
+    public String getsDateBorn() {
+        return sDateBorn;
     }
 
-    public void setoDateBorn(String oDateBorn) {
-        this.oDateBorn = oDateBorn;
+    public void setsDateBorn(String sDateBorn) {
+        this.sDateBorn = sDateBorn;
     }
 
     public String getsName() {
@@ -66,19 +67,19 @@ public class ItemEmk {
         this.sThirdName = sThirdName;
     }
 
-    public Integer getiSerialPolice() {
-        return iSerialPolice;
+    public String getsSerialPolice() {
+        return sSerialPolice;
     }
 
-    public void setiSerialPolice(int iSerialPolice) {
-        this.iSerialPolice = iSerialPolice;
+    public void setsSerialPolice(String sSerialPolice) {
+        this.sSerialPolice = sSerialPolice;
     }
 
-    public Integer getiNumberPolice() {
-        return iNumberPolice;
+    public String getsNumberPolice() {
+        return sNumberPolice;
     }
 
-    public void setiNumberPolice(int iNumberPolice) {
-        this.iNumberPolice = iNumberPolice;
+    public void setsNumberPolice(String sNumberPolice) {
+        this.sNumberPolice = sNumberPolice;
     }
 }

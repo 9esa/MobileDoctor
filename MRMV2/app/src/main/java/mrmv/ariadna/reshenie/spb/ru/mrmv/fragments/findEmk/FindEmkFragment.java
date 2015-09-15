@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,14 +47,10 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
     private ListView lvListOfUsers;
 
-    private TextView tvNumber, tvFIO, tvDateBorn, tvUserPhone,tvAddress;
+    private TextView tvNumber, tvFIO, tvDateBorn, tvUserPhone, tvAddress;
 
-    //Статичный логин. Т.к. необходимо гарантировать наличие токена
     static private LoginAccount oLoginAccount;
 
-    /**
-     * Необходимо для подключения к сервису для загрузки
-     */
     private ServiceLoading oServiceLoading;
     private ServiceConnection sConnectionChecking;
     private boolean bConnectToServiceDownload = false;
@@ -63,6 +60,8 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
     private EmkAdapter oEmkAdapter;
 
+    private FrameLayout flProgressBarFindEmk, flContainInformationMessage;
+
     private int iCurrentMode;
 
     public static String KEY_FOR_GET_USER_ID = "key_for_get_user_id";
@@ -71,10 +70,10 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Активизируем наш хелпер для базы данных
+
         oDataBaseHelper = DataBaseHelper.getInstance(getActivity());
 
-        oEmkAdapter  = new EmkAdapter(getActivity(), null);
+        oEmkAdapter = new EmkAdapter(getActivity(), null);
 
     }
 
@@ -84,10 +83,9 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
         View oView = inflater.inflate(R.layout.find_emk_fragment, container, false);
 
-        if(getArguments()!= null){
-            iCurrentMode =  getArguments().getInt(HomeActivity.KEY_FOR_GET_MODE);
+        if (getArguments() != null) {
+            iCurrentMode = getArguments().getInt(HomeActivity.KEY_FOR_GET_MODE);
         }
-
 
         startAllServices();
 
@@ -96,7 +94,7 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
         return oView;
     }
 
-    private void getAllViewElements(View oView){
+    private void getAllViewElements(View oView) {
 
         etNumberCard = (EditText) oView.findViewById(R.id.etNumberCard);
         etPhone = (EditText) oView.findViewById(R.id.etPhone);
@@ -117,13 +115,16 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
         lvListOfUsers = (ListView) oView.findViewById(R.id.lvListOfUsers);
 
+        flProgressBarFindEmk = (FrameLayout) oView.findViewById(R.id.flProgressBarFindEmk);
+        flContainInformationMessage = (FrameLayout) oView.findViewById(R.id.flContainInformationMessage);
+
         lvListOfUsers.setAdapter(oEmkAdapter);
 
         lvListOfUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int iItemSelected, long l) {
 
-                if(view != null){
+                if (view != null) {
 
                     Cursor oCurrentSelectedElements = ((Cursor) adapterView.getAdapter().getItem(iItemSelected));
 
@@ -139,7 +140,7 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
                     }
 
-                    if(iCurrentMode == HomeActivity.FIND_EMK){
+                    if (iCurrentMode == HomeActivity.FIND_EMK) {
 
                         HistoryFragment oHistoryFragment = new HistoryFragment();
 
@@ -148,14 +149,16 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
                         oHistoryFragment.setoLoginAccount(oLoginAccount);
 
                         FragmentManager oFragmentManager = getFragmentManager();
-                        FragmentTransaction oFragmentTransaction =  oFragmentManager.beginTransaction();
-                        oFragmentTransaction.replace(R.id.main_active_layout, oHistoryFragment);
+                        FragmentTransaction oFragmentTransaction = oFragmentManager.beginTransaction();
+                        //oFragmentTransaction.replace(R.id.main_active_layout, oHistoryFragment);
+                        oFragmentTransaction.replace(((ViewGroup) getView().getParent()).getId(), oHistoryFragment);
+
                         oFragmentTransaction.addToBackStack("fragmentStack");
                         oFragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                         oFragmentTransaction.commit();
 
 
-                    }else if(iCurrentMode == HomeActivity.BOOKING_VISIT){
+                    } else if (iCurrentMode == HomeActivity.BOOKING_VISIT) {
 
                         Bundle bundle = new Bundle();
 
@@ -167,8 +170,13 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
                         oChooseDoctorFragment.setArguments(bundle);
 
                         FragmentManager oFragmentManager = getFragmentManager();
-                        FragmentTransaction oFragmentTransaction =  oFragmentManager.beginTransaction();
-                        oFragmentTransaction.replace(R.id.main_active_layout, oChooseDoctorFragment);
+                        FragmentTransaction oFragmentTransaction = oFragmentManager.beginTransaction();
+
+
+                        //  oFragmentTransaction.replace(R.id.main_active_layout, oChooseDoctorFragment);
+
+                        oFragmentTransaction.replace(((ViewGroup) getView().getParent()).getId(), oChooseDoctorFragment);
+
                         oFragmentTransaction.addToBackStack("fragmentStack");
                         oFragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                         oFragmentTransaction.commit();
@@ -182,9 +190,33 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                lvListOfUsers.setVisibility(View.GONE);
+                flProgressBarFindEmk.setVisibility(View.VISIBLE);
+                flProgressBarFindEmk.bringToFront();
+
                 makeObjectForRequest();
             }
         });
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (sConnectionChecking != null) {
+            if (!bConnectToServiceDownload) {
+                return;
+            } else {
+                if (getActivity() != null) {
+                    getActivity().unbindService(sConnectionChecking);
+                    bConnectToServiceDownload = false;
+                }
+            }
+        } else {
+            return;
+        }
 
     }
 
@@ -220,106 +252,135 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
         return oLoginAccount;
     }
 
-    private void requestObjectFromServer(ItemEmk oItemEmk){
+    private void requestObjectFromServer(ItemEmk oItemEmk) {
 
-        if(bConnectToServiceDownload){
+        if (bConnectToServiceDownload) {
             oServiceLoading.getListPatient(getoLoginAccount(), oItemEmk, this);
-        }else{
+        } else {
             Toast.makeText(getActivity(), R.string.service_found_not_ready, Toast.LENGTH_LONG).show();
         }
 
     }
 
-    public String isNotNullString(String sValueString){
-        if(sValueString == null){
+    public String isNotNullString(String sValueString) {
+        if (sValueString == null) {
             return "";
-        }else{
-            if(sValueString.equals("null")){
+        } else {
+            if (sValueString.equals("null")) {
                 return "";
-            }else{
+            } else {
                 return sValueString;
             }
         }
     }
 
-    private void makeObjectForRequest(){
+    private void makeObjectForRequest() {
 
-        ItemEmk oItemEmk =  new ItemEmk();
+        ItemEmk oItemEmk = new ItemEmk();
 
         try {
 
-            if(etNumberCard.getText() != null){
+            if (etNumberCard.getText() != null) {
                 int iPermanentValue = Integer.valueOf(etNumberCard.getText().toString());
                 oItemEmk.setiNumberCard(iPermanentValue);
             }
 
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
 
 
         try {
 
-            if(etPhone.getText() != null){
+            if (etPhone.getText() != null) {
                 int iPermanentValue = Integer.valueOf(etPhone.getText().toString());
                 oItemEmk.setiPhone(iPermanentValue);
             }
 
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
 
 
         /**
          *
          */
-        if(etFirstName.getText() != null){
+        if (etFirstName.getText() != null) {
             String sValue = etFirstName.getText().toString();
 
-            if(sValue.equals("")){
+            if (sValue.equals("")) {
                 oItemEmk.setsName(null);
-            }else{
+            } else {
                 oItemEmk.setsName(sValue);
             }
 
         }
 
-        if(etSecondName.getText() != null){
+        if (etSecondName.getText() != null) {
             String sValue = etSecondName.getText().toString();
 
-            if(sValue.equals("")){
+            if (sValue.equals("")) {
                 oItemEmk.setsSecondName(null);
-            }else {
+            } else {
                 oItemEmk.setsSecondName(sValue);
             }
 
         }
 
-        if(etThirdName.getText() != null){
+        if (etThirdName.getText() != null) {
 
             String sValue = etThirdName.getText().toString();
 
-            if(sValue.equals("")){
+            if (sValue.equals("")) {
                 oItemEmk.setsThirdName(null);
-            }else {
+            } else {
                 oItemEmk.setsThirdName(sValue);
+            }
+
+        }
+
+
+        if (etDate.getText() != null) {
+
+            String sValue = etDate.getText().toString();
+
+            if (sValue.equals("")) {
+                oItemEmk.setsDateBorn(null);
+            } else {
+                oItemEmk.setsDateBorn(sValue);
             }
 
         }
 
         try {
 
-            if(etPoliceSerial.getText() != null){
-                int iPermanentValue = Integer.valueOf(etPoliceSerial.getText().toString());
-                oItemEmk.setiSerialPolice(iPermanentValue);
+            if (etPoliceSerial.getText() != null) {
+                String sPermanentValue = etPoliceSerial.getText().toString();
+
+                if (sPermanentValue.equals("")) {
+                    oItemEmk.setsSerialPolice(null);
+                } else {
+                    oItemEmk.setsSerialPolice(sPermanentValue);
+                }
+
             }
 
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
 
         try {
 
-            if(etNumberPolice.getText() != null){
-                int iPermanentValue = Integer.valueOf(etNumberPolice.getText().toString());
-                oItemEmk.setiNumberPolice(iPermanentValue);
+            if (etNumberPolice.getText() != null) {
+                String sPermanentValue = etNumberPolice.getText().toString();
+
+                if (sPermanentValue.equals("")) {
+                    oItemEmk.setsNumberPolice(null);
+                } else {
+                    oItemEmk.setsNumberPolice(sPermanentValue);
+                }
+
             }
 
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
 
         requestObjectFromServer(oItemEmk);
 
@@ -331,7 +392,7 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
     @Override
     public void loadCompleted() {
-        if(getActivity() != null){
+        if (getActivity() != null) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -348,7 +409,20 @@ public class FindEmkFragment extends Fragment implements ICommonLoadComplete, Lo
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor oCursor) {
+
         oEmkAdapter.swapCursor(oCursor);
+        flProgressBarFindEmk.setVisibility(View.GONE);
+
+        if (oCursor != null) {
+            if (oCursor.getCount() == 0) {
+                lvListOfUsers.setVisibility(View.GONE);
+                flContainInformationMessage.setVisibility(View.VISIBLE);
+            } else {
+                lvListOfUsers.setVisibility(View.VISIBLE);
+                flContainInformationMessage.setVisibility(View.GONE);
+            }
+        }
+
     }
 
     @Override

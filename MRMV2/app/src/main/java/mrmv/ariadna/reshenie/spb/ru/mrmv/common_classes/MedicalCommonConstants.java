@@ -9,12 +9,12 @@ public class MedicalCommonConstants {
      * Имя базы данныых
      */
 
-  //  public static final String DATABASE_NAME = "/storage/sdcard0/reshenie.spb.ru.mrmv.db";
+    //public static final String DATABASE_NAME = "/storage/sdcard0/reshenie.spb.ru.mrmv.db";
     public static final String DATABASE_NAME = "reshenie.spb.ru.mrmv.db";
     /**
      * Версия базы данных
      */
-    public static final int DATABASE_VERSION = 16;
+    public static final int DATABASE_VERSION = 19;
 
 //----------------------------Справочники по тегам----------------------------------------------------------
     /**

@@ -74,6 +74,8 @@ public class LoadGuidesForSpinnerData extends CommonMainLoading implements ICall
 
         if (dataAboutLoadedObjects != null) {
 
+            ExtraFieldStatTalon.removeInfornationViaFormItemId(sqlHelper,  String.valueOf(identificatieNummer));
+
             sqlHelper.getWritableDatabase().beginTransaction();
 
             for (int iCount = 0; iCount < dataAboutLoadedObjects.size(); iCount++) {
@@ -82,6 +84,13 @@ public class LoadGuidesForSpinnerData extends CommonMainLoading implements ICall
                 try {
                     sFormItemId = String.valueOf(identificatieNummer);
                     sIdExtraField = String.valueOf(oItemGuides.get(ExtraFieldStatTalon.ID));
+
+                    if(sIdExtraField != null){
+                        if(sIdExtraField.equals("null")){
+                            continue;
+                        }
+                    }
+
                     sCode = String.valueOf(oItemGuides.get(ExtraFieldStatTalon.CODE));
                     sText = String.valueOf(oItemGuides.get(ExtraFieldStatTalon.TEXT));
 

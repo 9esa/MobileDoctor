@@ -43,6 +43,22 @@
 
     </PreferenceCategory>
 
+
+    <PreferenceCategory
+        android:title="@string/setting_found_clients">
+
+        <EditTextPreference
+            android:title="@string/max_value_for_view_clients"
+            android:key="@string/max_value_for_view_users"
+            android:defaultValue="50"
+            android:summary="@string/max_value_for_view_pacient"
+            android:numeric="integer"
+            android:maxLength="2"
+        />
+
+    </PreferenceCategory>
+
+
     <PreferenceCategory
         android:title="@string/title_param_enter">
 

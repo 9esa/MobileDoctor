@@ -47,7 +47,13 @@ public class LoadProtocolsFilters extends CommonMainLoading implements ICallback
         String sValueAddressForRequest = "http://" + sAddress + "/doctor-web/api/housevisit/protocolfilters";
 
         AsyncLoadingInformation loadingInformation = new AsyncLoadingInformation("", this, 0);
-        loadingInformation.setsCurrentToken(oLoginAccount.getsToken());
+
+        if(oLoginAccount == null){
+            loadingInformation.setsCurrentToken(null);
+        }else{
+            loadingInformation.setsCurrentToken(oLoginAccount.getsToken());
+        }
+
         loadingInformation.setsRequest(sValueAddressForRequest);
         loadingInformation.setDaemon(true);
         loadingInformation.start();

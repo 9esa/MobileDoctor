@@ -38,11 +38,11 @@ public class LoadNumbers extends CommonMainLoading implements ICallbackForLoadin
         this.sAddress = sAddress;
     }
 
-    public void startLoadInformationAboutEnableDoctors(String sDate, String sDocDepId, ICommonLoadComplete iLoadedCompleteCallBack) {
+    public void startLoadInformationAboutEnableDoctors(String sDate, String sDocDepId, ICommonLoadComplete iLoadedCompleteCallBack,String sIdPacient) {
 
         this.iLoadedCompleteCallBack = iLoadedCompleteCallBack;
 
-        String sValueAddressForRequest = "http://" + sAddress + "/doctor-web/api/patient/reg/rnumblist/docdep/" + sDocDepId + "/date/" + sDate;
+        String sValueAddressForRequest = "http://" + sAddress + "/doctor-web/api/patient/reg/rnumblist/docdep/" + sDocDepId + "/date/" + sDate + "?patientid=" + sIdPacient ;
 
         AsyncLoadingInformation loadingInformation = new AsyncLoadingInformation("", this, new RequestObject(sDate, sDocDepId));
         loadingInformation.setsCurrentToken(oLoginAccount.getsToken());
@@ -61,7 +61,7 @@ public class LoadNumbers extends CommonMainLoading implements ICallbackForLoadin
     @Override
     public void saveLoadedItemToDB(ArrayList<JSONObject> dataAboutLoadedObjects, Object identificatieNummer) {
 
-        String sId = null, sIdDoctor = null, sTime = null, sStatus = null, sDate = null;
+        String sId = null, sIdDoctor = null, sTime = null, sStatus = null, sDate = null, sPacientId = null;
 
         if(sqlHelper != null){
             Numbers.removeAllInfornationAboutTables(sqlHelper);
@@ -85,6 +85,7 @@ public class LoadNumbers extends CommonMainLoading implements ICallbackForLoadin
                             sTime = String.valueOf(jsonObjectLoaderItem.get(Numbers.TIME));
                             sStatus = String.valueOf(jsonObjectLoaderItem.get(Numbers.STATUS));
                             sDate = oRequestObject.getsDate();
+                            sPacientId = String.valueOf(jsonObjectLoaderItem.get(Numbers.PATIENTID));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -97,6 +98,7 @@ public class LoadNumbers extends CommonMainLoading implements ICallbackForLoadin
                         values.put(Numbers.TIME, sTime);
                         values.put(Numbers.STATUS, sStatus);
                         values.put(Numbers.DATE, sDate);
+                        values.put(Numbers.PATIENTID, sPacientId);
 
                         sqlHelper.getWritableDatabase().insertWithOnConflict(Numbers.TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
 

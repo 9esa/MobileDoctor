@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.activites.HomeActivity;
 
 /**
@@ -66,8 +67,15 @@ public class CommonMainLoading {
                                         if (oJsonObjectData != null) {
 
                                                 String sErrorCode = String.valueOf(oJsonObjectData.get("errorCode"));
+                                                String sErrorMessage = "";
 
-                                                String sErrorMessage = String.valueOf(oJsonObjectData.get("errorMsg"));
+                                                if(sErrorCode!= null){
+                                                    if(sErrorCode.equals("LIMIT_EXCEEDED")){
+                                                        sErrorMessage = mContext.getString(R.string.overdraft_limit);
+                                                    }else{
+                                                        sErrorMessage = String.valueOf(oJsonObjectData.get("errorMsg"));
+                                                    }
+                                                }
 
                                                 if(mContext != null){
                                                     Intent intent = new Intent(HomeActivity.BROADCAST_ACTION_TAKING_INFORMATION);
@@ -76,8 +84,7 @@ public class CommonMainLoading {
                                                 }
                                             }
                                         }
-                            }
-
+                                }
                         }
                     }
                 }

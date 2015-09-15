@@ -1,8 +1,8 @@
 package mrmv.ariadna.reshenie.spb.ru.mrmv;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.Instrumentation;
+import android.support.v4.app.Fragment;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -11,7 +11,6 @@ import android.widget.EditText;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.activites.HomeActivity;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.activites.LauncherActivity;
-import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.LoginFragment;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.myCalls.MyCallsMenuFragmet;
 
 /**
@@ -23,7 +22,7 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<LauncherAc
 
     int TIMEOUT_IN_LOGIN = 10000;
 
-    private String sValueForLogin = "5555";
+    private String sValueForLogin = "6479";
 
     /**
      * Количество попыток залогинется
@@ -42,14 +41,16 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<LauncherAc
 
     @LargeTest
     public void testLoginAction()throws Exception {
-        HomeActivity homeActivity = successfulLogin();
 
-        assertNotNull(homeActivity);
+            HomeActivity homeActivity = successfulLogin();
 
-        openStatTalon(homeActivity);
+            assertNotNull(homeActivity);
 
+            openStatTalon(homeActivity);
 
-        successfulLogout(homeActivity);
+            successfulLogout(homeActivity);
+
+            getInstrumentation().waitForIdleSync();
 
     }
 
@@ -58,29 +59,33 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<LauncherAc
         mMainActivity = getActivity();
 
         LauncherActivity oLauncherActivity = (LauncherActivity)getActivity();
+
         assertEquals(true,oLauncherActivity.isConnected());
-
-        LoginFragment oLoginFragment = new LoginFragment();
-
-        mMainActivity.getFragmentManager().beginTransaction()
-                .replace(R.id.space_for_frame, oLoginFragment, "tag")
-                .commit();
 
         getInstrumentation().waitForIdleSync();
 
-        Fragment oCurrentFragment = mMainActivity.getFragmentManager().findFragmentByTag("tag");
+        android.app.Fragment oCurrentFragment = mMainActivity.getFragmentManager().findFragmentByTag("loginFragment");
 
         assertNotNull(oCurrentFragment.getView());
 
-        EditText eLoginName  = (EditText)  oCurrentFragment.getView().findViewById(R.id.authentication_login);
-        EditText ePassword  = (EditText)  oCurrentFragment.getView().findViewById(R.id.authentication_password);
+        final EditText eLoginName  = (EditText)  oCurrentFragment.getView().findViewById(R.id.authentication_login);
+        final EditText ePassword  = (EditText)  oCurrentFragment.getView().findViewById(R.id.authentication_password);
         Button bButtonLogin =  (Button) oCurrentFragment.getView().findViewById(R.id.authentication_login_btn);
 
         assertNotNull(bButtonLogin);
         assertNotNull(eLoginName);
         assertNotNull(ePassword);
 
-        ePassword.setText(sValueForLogin);
+
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                ePassword.requestFocus();
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        getInstrumentation().sendStringSync(sValueForLogin);
+        getInstrumentation().waitForIdleSync();
 
         Instrumentation.ActivityMonitor oActivityMonitor = getInstrumentation().addMonitor(HomeActivity.class.getName(), null, false);
 
@@ -108,7 +113,6 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<LauncherAc
 
         Instrumentation.ActivityMonitor oActivityMonitor = getInstrumentation().addMonitor(LauncherActivity.class.getName(), null, false);
 
-        // Validate that ReceiverActivity is started
         TouchUtils.clickView(this, bButtonLogout);
 
         LauncherActivity receiverActivity = (LauncherActivity)
@@ -128,25 +132,25 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<LauncherAc
 
     private void openStatTalon(HomeActivity homeActivity){
 
-        /*
-         * Временный выбор мои вызовы
-         */
-        MyCallsMenuFragmet oMyCallsMenuFragmet = new MyCallsMenuFragmet();
-
         assertNotNull("Login account after authorization is null", homeActivity.getoLoginAccount());
 
         getInstrumentation().waitForIdleSync();
 
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Fragment oCurrentFragment = homeActivity.getSupportFragmentManager().findFragmentByTag("meCallsMenu");
 
-        Fragment oCurrentFragment = homeActivity.getFragmentManager().findFragmentByTag("meCallsMenu");
+        getInstrumentation().waitForIdleSync();
 
         assertNotNull(oCurrentFragment.getView());
 
+        if(oCurrentFragment instanceof MyCallsMenuFragmet){
+
+            MyCallsMenuFragmet oMyCallsMenuFragmet = (MyCallsMenuFragmet) oCurrentFragment;
+            assertNotNull(oMyCallsMenuFragmet);
+        }
+    }
+
+    private void openDrawer (){
+       // Drawer.Result drawerResult
     }
 
 }

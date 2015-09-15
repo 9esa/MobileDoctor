@@ -26,7 +26,10 @@ import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
@@ -258,6 +261,18 @@ public class MesFragment extends Fragment implements ICommonLoadComplete, Loader
             }
     }
 
+    private void chooseNewDoctorFastSelect(Button bntForChooseDoctor, int iMode, boolean bFast){
+        if(bConnectToServiceDownload){
+
+            ChoosingNewDoctor oChoosingNewDoctor = new ChoosingNewDoctor(this, oLoginAccount, bntForChooseDoctor, getsVisitId());
+            oChoosingNewDoctor.setTypeMode(iMode);
+            oChoosingNewDoctor.setFastMode(bFast);
+            oChoosingNewDoctor.selectNewMesForDiagnoses();
+
+
+        }
+    }
+
     private void chooseNewDate(final Button bntForChooseDate, final Boolean bIsOpen){
 
         bntForChooseDate.setOnClickListener(new View.OnClickListener() {
@@ -357,7 +372,7 @@ public class MesFragment extends Fragment implements ICommonLoadComplete, Loader
 
         startShowProgressBar(true);
 
-        oServiceLoading.getInformationAboutMesByVisitWithEmptyControl(oLoginAccount, getsVisitId(),getMaintDiagnoses(), this);
+        oServiceLoading.getInformationAboutMesByVisitWithEmptyControl(oLoginAccount, getsVisitId(), getMaintDiagnoses(), this);
 
     }
 
@@ -492,8 +507,21 @@ public class MesFragment extends Fragment implements ICommonLoadComplete, Loader
                     if(sTempString != null){
                         etComments.setText(sTempString);
                     }
-
                 } while (cursorOfData.moveToNext());
+            }else{
+                if (oDataBaseHelper != null) {
+                    Cursor oCursor = MesForDiagnoses.getInfoByDiagnoses(oDataBaseHelper,getMaintDiagnoses());
+                    if(oCursor.getCount()>0){
+                        if(oCursor.getCount() <= 0){
+                            Mes.createMesValueMesValue(oDataBaseHelper, getsVisitId());
+                        }
+                        setupDefaultValue();
+                    }else{
+                        scrollForMes.setVisibility(View.GONE);
+                        frame_for_empty_mes.setVisibility(View.VISIBLE);
+                        frame_for_empty_mes.bringToFront();
+                    }
+                }
             }
 
 
@@ -503,19 +531,28 @@ public class MesFragment extends Fragment implements ICommonLoadComplete, Loader
             stopShowProgressBar();
         }
 
-        if (oDataBaseHelper != null) {
-            Cursor oCursor = MesForDiagnoses.getInfoByDiagnoses(oDataBaseHelper,getMaintDiagnoses());
-            if(oCursor.getCount()>0){
-                if(oCursor.getCount() <= 0){
-                    Mes.createMesValueMesValue(oDataBaseHelper, getsVisitId());
-                }
-            }else{
-                scrollForMes.setVisibility(View.GONE);
-                frame_for_empty_mes.setVisibility(View.VISIBLE);
-                frame_for_empty_mes.bringToFront();
-            }
 
-        }
+
+    }
+
+    private void setupDefaultValue(){
+
+        DateFormat dfForCurrent = new SimpleDateFormat("dd.MM.yyyy");
+
+        String sDefaultDateValue = dfForCurrent.format(new Date());
+
+        bt_add_date_open_mes.setText(sDefaultDateValue);
+
+        Mes.saveOpenDate(oDataBaseHelper, getsVisitId(), bt_add_date_open_mes.getText().toString());
+
+        chooseNewDoctorFastSelect(bt_add_doctor_open_mes, OPENDOCTOR, true);
+
+//        String sName = (oCurrentSelectedElements).getString(oCurrentSelectedElements.getColumnIndex(EnableDoctors.NAME));
+//        String sDocdepId = (oCurrentSelectedElements).getString(oCurrentSelectedElements.getColumnIndex(EnableDoctors.IDDOCTOR));
+//
+//        btnSourceButton.setText(sName);
+
+//       Mes.saveOpenDocdepId(oDataBaseHelper,  getsVisitId(), sDocdepId);
 
     }
 

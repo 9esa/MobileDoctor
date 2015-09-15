@@ -14,8 +14,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +56,7 @@ public class MyCallsMenuFragmet extends Fragment implements IDateChanged, ICommo
     private FragmentActivity myContext;
     private LoginAccount loginAccount;
 
-    private Button btUpdate;
+    private ImageButton btUpdate;
     private FrameLayout flProgressBar;
 
     private LinearLayout llOpenMaps;
@@ -131,9 +131,8 @@ public class MyCallsMenuFragmet extends Fragment implements IDateChanged, ICommo
         vpMyCalls = (ViewPager) oView.findViewById(R.id.pager);
         slidingTabLayout = (SlidingTabLayout) oView.findViewById(R.id.sliding_tabs);
         tvDayOfWeek = (TextView) oView.findViewById(R.id.week_day);
-        btUpdate = (Button) oView.findViewById(R.id.update_button);
+        btUpdate = (ImageButton) oView.findViewById(R.id.update_button);
         flProgressBar  = (FrameLayout) oView.findViewById(R.id.progress_bar_my_calls);
-
         llOpenMaps = (LinearLayout) oView.findViewById(R.id.layout_opem_maps);
 
         setCurrentDate();

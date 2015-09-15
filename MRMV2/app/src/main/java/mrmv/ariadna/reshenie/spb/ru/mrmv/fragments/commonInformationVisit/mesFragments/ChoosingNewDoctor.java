@@ -31,6 +31,7 @@ public class ChoosingNewDoctor implements IRouteDialogWithRequest {
 
     private String sVisitId;
     private int iTypeMode;
+    private boolean fastMode = false;
 
     public ChoosingNewDoctor(MesFragment oMesFragment, LoginAccount oLoginAccount, Button btnSourceButton, String sVisitId) {
         this.oMesFragment = oMesFragment;
@@ -53,7 +54,12 @@ public class ChoosingNewDoctor implements IRouteDialogWithRequest {
             selectDialogWithRequest.setoCursorAdapter(oDoctorAdapter);
             selectDialogWithRequest.setoLoginAccount(oLoginAccount);
             selectDialogWithRequest.setoRequestValue(new Object());
-            selectDialogWithRequest.show(oMesFragment.getFragmentManager(), "addNewDoctor");
+            selectDialogWithRequest.setbFastMode(fastMode);
+
+            //if(!fastMode){
+                selectDialogWithRequest.show(oMesFragment.getFragmentManager(), "addNewDoctor");
+            //}
+
         }
     }
 
@@ -94,5 +100,9 @@ public class ChoosingNewDoctor implements IRouteDialogWithRequest {
 
     public void setTypeMode(int typeMode) {
         this.iTypeMode = typeMode;
+    }
+
+    public void setFastMode(boolean fastMode) {
+        this.fastMode = fastMode;
     }
 }

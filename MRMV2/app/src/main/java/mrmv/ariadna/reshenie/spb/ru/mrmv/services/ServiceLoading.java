@@ -25,10 +25,13 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.mesAction.LoadM
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.numbers.LoadNumbers;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.LoadProtocols;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocolsFiltersAction.LoadProtocolsFilters;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.rlsAction.LoadRLS;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.specials.LoadSpecial;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.statusDataBase.StatusDatabase;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.visitAction.LoadVisit;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.ILoginEnableAccess;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.bookRLS.ItemRLS;
+import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.documentation.LoadDocuments;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.fragments.findEmk.ItemEmk;
 
 /**
@@ -193,9 +196,9 @@ public class ServiceLoading extends Service {
         return true;
     }
 
-    public boolean getListNumbers(LoginAccount oLoginAccount, String sDate, String sDocDepId, ICommonLoadComplete iLoadedComleteCallBack){
+    public boolean getListNumbers(LoginAccount oLoginAccount, String sDate, String sDocDepId, ICommonLoadComplete iLoadedComleteCallBack, String sIdPacient){
 
-        new LoadNumbers(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadInformationAboutEnableDoctors(sDate, sDocDepId, iLoadedComleteCallBack);
+        new LoadNumbers(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadInformationAboutEnableDoctors(sDate, sDocDepId, iLoadedComleteCallBack, sIdPacient);
 
         return true;
     }
@@ -214,19 +217,32 @@ public class ServiceLoading extends Service {
         return true;
     }
 
+    public boolean getListProducts(LoginAccount oLoginAccount, ItemRLS oItemRLS, ICommonLoadComplete iLoadedComleteCallBack){
+
+        new LoadRLS(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadInformationProducts(oItemRLS, iLoadedComleteCallBack);
+
+        return true;
+    }
 
     public int startUpdateGuides(ILoginEnableAccess iLoginEnableAccess) {
 
         int iCountToRequest = 0;
 
-        oDataBaseHelper.deleteAllDataBase(sdb);
+        oDataBaseHelper.deleteDataBasePartly(sdb);
 
 
       //   iCountToRequest += new LoadProtocols(null, sqlHelper, sAddress).startLoadEnabledProtocols(iLoginEnableAccess);
 
+      //  iCountToRequest += new LoadMedicalGuidesMKB10(null, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadMedicalGuides(iLoginEnableAccess);
+      //  iCountToRequest += new LoadMedicalGuides(null, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadMedicalGuides(iLoginEnableAccess);
+  //      iCountToRequest += new LoadEnableStructureDataField(null, oDataBaseHelper, getAddressForRequest()).startLoadEnableStructureDataField(iLoginEnableAccess);
+
+
+       // iCountToRequest += new LoadProtocols(null, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadEnabledProtocols(iLoginEnableAccess);
         iCountToRequest += new LoadMedicalGuidesMKB10(null, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadMedicalGuides(iLoginEnableAccess);
         iCountToRequest += new LoadMedicalGuides(null, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadMedicalGuides(iLoginEnableAccess);
-  //      iCountToRequest += new LoadEnableStructureDataField(null, oDataBaseHelper, getAddressForRequest()).startLoadEnableStructureDataField(iLoginEnableAccess);
+        iCountToRequest += new LoadProtocolsFilters(null, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadProtocolsFilters(iLoginEnableAccess);
+        iCountToRequest += new LoadDocuments(null, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadDocuments(iLoginEnableAccess);
 
 
         return iCountToRequest;
@@ -241,7 +257,7 @@ public class ServiceLoading extends Service {
         iCountToRequest += new LoadMedicalGuidesMKB10(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadMedicalGuides(iLoginEnableAccess);
         iCountToRequest += new LoadMedicalGuides(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadMedicalGuides(iLoginEnableAccess);
         iCountToRequest += new LoadProtocolsFilters(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadProtocolsFilters(iLoginEnableAccess);
-
+        iCountToRequest += new LoadDocuments(oLoginAccount, oDataBaseHelper, getAddressForRequest(), getBaseContext()).startLoadDocuments(iLoginEnableAccess);
         //      iCountToRequest += new LoadCalls(oLoginAccount, sqlHelper, sAddress).startLoadCalls(iLoginEnableAccess);
 
         return iCountToRequest;

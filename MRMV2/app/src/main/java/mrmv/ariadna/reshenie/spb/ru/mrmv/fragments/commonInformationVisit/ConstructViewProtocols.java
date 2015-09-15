@@ -35,8 +35,8 @@ import mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.protocols.Struc
  */
 public class ConstructViewProtocols {
 
-    public static final float SPINNER_WEIGHT = 0.945f;
-    public static final float EDITE_TEXT_WEIGHT = 0.055f;
+    public static final float SPINNER_WEIGHT = 0.940f;
+    public static final float EDITE_TEXT_WEIGHT = 0.050f;
     public static int QUESTION = 0;
     public static int EXTRAFIELD = 1;
 
@@ -63,8 +63,13 @@ public class ConstructViewProtocols {
     private static float fLeft = 0.25f;
 
     private static HashMap <Spinner, EditText> mapOfConnectionSpAndEt;
+    private static HashMap <Spinner, Boolean> mapFirstCallSpinner;
 
-    public static View constructNewRow(TableLayout tlExtraSpinner, Activity oActivity, ItemProtocols oItemProtocols, DataBaseHelper oDataBaseHelper) {
+    private static boolean bSetDefaultValue = false;
+
+    public static View constructNewRow(TableLayout tlExtraSpinner, Activity oActivity, ItemProtocols oItemProtocols, DataBaseHelper oDataBaseHelper, boolean bSetDefaultValue) {
+
+        ConstructViewProtocols.bSetDefaultValue = bSetDefaultValue;
 
         LinearLayout llMain = new LinearLayout(oActivity);
         llMain.setLayoutParams(new LinearLayout.LayoutParams(
@@ -73,6 +78,10 @@ public class ConstructViewProtocols {
 
         if(mapOfConnectionSpAndEt == null){
             mapOfConnectionSpAndEt = new HashMap<>();
+        }
+
+        if(mapFirstCallSpinner == null){
+            mapFirstCallSpinner = new HashMap<>();
         }
 
         LinearLayout llLeftColumn = new LinearLayout(oActivity);
@@ -213,15 +222,25 @@ public class ConstructViewProtocols {
 
         //spLeft.setPadding(0,0,(int) oActivity.getResources().getDimension(R.dimen.left_padding_edit_text),0);
 
+//        ImageButton btnClear = new ImageButton(oActivity);
+//        params = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT, EDITE_TEXT_WEIGHT);
+//        btnClear.setLayoutParams(params);
 
-        llMain.addView(setParamForView(oActivity, spLeft, oItemProtocols,false));
+//        btnClear.setBackground(R.drawable.ic_clear_black_24dp);
+//        btnClear.setBackgroundResource(R.drawable.ic_clear_black_24dp);
+//        btnClear.setImageResource();
+        //btnClear.setBackground();
+
+        llMain.addView(setParamForView(oActivity, spLeft, oItemProtocols, false));
 
         llMain.addView(setParamForView(oActivity, editText, oItemProtocols,true));
 
+     //   llMain.addView(btnClear);
+
         llLeftColumn.addView(setParamForView(oActivity, llMain, oItemProtocols,false));
 
-        mapOfConnectionSpAndEt.put(spLeft,editText);
-
+        mapOfConnectionSpAndEt.put(spLeft, editText);
+        mapFirstCallSpinner.put(spLeft,false);
         // tvTitleSpinnerLeft.setTextColor(oActivity.getResources().getColor(R.color.color_for_lists));
 
     }
@@ -232,11 +251,47 @@ public class ConstructViewProtocols {
             itemSpiiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(i != 0 ){
-                        mapOfConnectionSpAndEt.get(itemSpiiner).setText(adapterView.getSelectedItem().toString());
+                        if (adapterView != null) {
+                            if(adapterView instanceof Spinner){
+
+                                Spinner listItemGuides = (Spinner)adapterView;
+
+                                if(mapFirstCallSpinner != null){
+
+                                    if(mapFirstCallSpinner.get(listItemGuides)){
+                                        if(listItemGuides.getCount() > 0) {
+
+                                            Object object = listItemGuides.getItemAtPosition(0);
+
+                                            if (object instanceof ItemGuides) {
+
+                                                ItemGuides oItemGuides = (ItemGuides) object;
+
+                                                if (oItemGuides.getsMultiValue().equals("1")) {
+
+                                                    String sValue = mapOfConnectionSpAndEt.get(itemSpiiner).getText().toString();
+
+                                                    if(sValue.isEmpty()){
+                                                        sValue += adapterView.getSelectedItem().toString();
+                                                    }else{
+                                                        sValue += ", " + adapterView.getSelectedItem().toString();
+                                                    }
+
+                                                    mapOfConnectionSpAndEt.get(itemSpiiner).setText(sValue);
+
+                                                }else{
+                                                    String sValue = adapterView.getSelectedItem().toString();
+                                                    mapOfConnectionSpAndEt.get(itemSpiiner).setText(sValue);
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    mapFirstCallSpinner.put(listItemGuides,true);
+                                }
+                            }
+                        }
                     }
-                   //  editText.setText(adapterView.getSelectedItem().toString());
-                }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
@@ -514,7 +569,7 @@ public class ConstructViewProtocols {
         String sFormitemId = oItemProtocols.getsFormitemId();
 
         //Получаем список элементов из базы данных
-        List<ItemGuides> listItemGuides = ExtraFieldStatTalon.getLabelExtraFieldStatTalon(oDataBaseHelper, sFormitemId);
+        List<ItemGuides> listItemGuides = ExtraFieldStatTalon.getLabelExtraFieldStatTalon(oDataBaseHelper, sFormitemId, oItemProtocols);
 
         //Прикручиваем адаптер
         ArrayAdapter<ItemGuides> dataAdapter = new ArrayAdapter<ItemGuides>(oActivity,
@@ -533,7 +588,7 @@ public class ConstructViewProtocols {
         String sFormitemId = oItemProtocols.getsFormitemId();
 
         //Получаем список элементов из базы данных
-        List<ItemGuides> listItemGuides = ExtraFieldStatTalon.getLabelExtraFieldStatTalon(oDataBaseHelper, sFormitemId);
+        List<ItemGuides> listItemGuides = ExtraFieldStatTalon.getLabelExtraFieldStatTalon(oDataBaseHelper, sFormitemId, oItemProtocols);
 
         //Прикручиваем адаптер
         ArrayAdapter<ItemGuides> dataAdapter = new ArrayAdapter<ItemGuides>(oActivity,
@@ -545,7 +600,14 @@ public class ConstructViewProtocols {
         //Прикручиваем адаптер к Spinner
         spPlaceService.setAdapter(dataAdapter);
 
-        editText.setText(controlStringOnNull(oItemProtocols.getsCtext()));
+        if(bSetDefaultValue){
+            editText.setText(controlStringOnNull(oItemProtocols.getsDefaultValue()));
+        }else{
+            editText.setText(controlStringOnNull(oItemProtocols.getsCtext()));
+        }
+
+
+
         //setValueForEachSpinner(spPlaceService, oItemProtocols.getsCtext());
         //spPlaceService.setSelection());
     }
@@ -590,26 +652,5 @@ public class ConstructViewProtocols {
     public static void cleanAllElements() {
         mapOfConnectionSpAndEt.clear();
     }
-
-//        LinearLayout llRightColumn = new LinearLayout(oActivity);
-//        llRightColumn.setLayoutParams(getParamForExtraRow());
-//        llRightColumn.setOrientation(LinearLayout.VERTICAL);
-//        llRightColumn.setWeightSum((float)0.5);
-//
-//        //trItemExtraRow.addView(llRightColumn);
-//
-//        TextView tvTitleSpinnerRight = new TextView(oActivity);
-//        tvTitleSpinnerRight.setText("Правая штука ");
-//        tvTitleSpinnerRight.setTextColor(Color.BLACK);
-//        llRightColumn.addView(tvTitleSpinnerRight);
-//
-//        Spinner spRight = new Spinner(oActivity);
-//        loadSpinnersData(spRight, MedicalCommonConstants.TYPE_VISIT, oDataBaseHelper, oActivity);
-//        spRight.setBackgroundColor(oActivity.getResources().getColor(R.color.spinner_background));
-//        llRightColumn.addView(spRight);
-//
-//        llMain.addView(llRightColumn);
-
-//        tlExtraSpinner.addView(trItemExtraRow);
 
 }

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title_of_found_preparat"
+        android:id="@+id/tvTitleFoundRLS"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/all_margin_found_product">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/text_view_product_name"
+                    android:id="@+id/tvProductName"
+                    android:layout_weight="0.70"
+                    android:textSize="@dimen/text_zise_of_rls" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etProductName"
+                    android:layout_weight="0.3"
+                    android:textSize="@dimen/text_zise_of_rls" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:layout_marginTop="@dimen/margin_top_title_sale_name">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/text_view_name_of_active_component"
+                    android:id="@+id/tvNameOfActiveComponent"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_zise_of_rls" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etNameOfActiveComponent"
+                    android:layout_weight="0.3"
+                    android:textSize="@dimen/text_zise_of_rls" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:layout_marginTop="@dimen/margine_top_title_name_of_group_product">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/text_view_name_of_group_component"
+                    android:id="@+id/tvNameOfGroupComponent"
+                    android:layout_weight="0.7"
+                    android:textSize="@dimen/text_zise_of_rls" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etNameOfGroupComponent"
+                    android:layout_weight="0.3"
+                    android:textSize="@dimen/text_zise_of_rls" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.93"
+            android:gravity="center_vertical|center_horizontal">
+
+            <Button
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:id="@+id/btnFoundProduct"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_menu_search"
+                android:gravity="center_vertical|center_horizontal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvListOfProduct"
+            android:layout_marginLeft="@dimen/all_margin_found_product"
+            android:layout_marginRight="@dimen/all_margin_found_product" />
+
+        <FrameLayout
+            android:id="@+id/flMessageEmptyValue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shadow_color_numbs"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvEmptyListRls"
+                android:layout_gravity="center"
+                android:text="@string/result_is_empty" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/common_shadow_color"
+            android:visibility="gone" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

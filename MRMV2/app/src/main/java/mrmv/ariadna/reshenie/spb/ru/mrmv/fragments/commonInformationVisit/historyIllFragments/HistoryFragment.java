@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
@@ -38,7 +39,7 @@ public class HistoryFragment extends Fragment  implements ICommonLoadComplete,Lo
     private boolean bConnectToServiceDownload = false;
     private Intent intentCheckingData;
 
-    private FrameLayout frame_for_progress_bar;
+    private FrameLayout frame_for_progress_bar, flHistoryIsEmpty;
 
     private DataBaseHelper oDataBaseHelper;
 
@@ -47,6 +48,7 @@ public class HistoryFragment extends Fragment  implements ICommonLoadComplete,Lo
 
     private WebView wvHistory;
 
+    private TextView tvEmptyHistory;
 
     public static void setMenuHolder(AdapterMenuMyCalls.MenuHolder menuHolder) {
 
@@ -68,6 +70,9 @@ public class HistoryFragment extends Fragment  implements ICommonLoadComplete,Lo
         wvHistory.getSettings().setJavaScriptEnabled(true);
 
         frame_for_progress_bar = (FrameLayout) oView.findViewById(R.id.flProgressBar);
+        flHistoryIsEmpty = (FrameLayout) oView.findViewById(R.id.flHistoryIsEmpty);
+
+        tvEmptyHistory = (TextView)oView.findViewById(R.id.tvEmptyHistory);
 
         return oView;
     }
@@ -147,16 +152,39 @@ public class HistoryFragment extends Fragment  implements ICommonLoadComplete,Lo
         //toDo
         if (cursor.moveToFirst()) {
             do {
-                String html = cursor.getString(cursor.getColumnIndex(History.TEXT));
+                String sHTML = cursor.getString(cursor.getColumnIndex(History.TEXT));
                 String mime = "text/html";
                 String encoding = "utf-8";
 
-                wvHistory.loadDataWithBaseURL(null, html, mime, encoding, null);
-            } while (cursor.moveToNext());
-        }
+                if(sHTML != null){
 
-        wvHistory.setVisibility(View.VISIBLE);
-        frame_for_progress_bar.setVisibility(View.GONE);
+                    int iStartParse = sHTML.indexOf("<body>");
+
+                    if(iStartParse  > -1){
+                        sHTML  = sHTML.substring(iStartParse);
+
+                        int iIndexDef = sHTML.indexOf("</body>");
+
+                        if(iIndexDef >= 6 && iIndexDef <= 16){
+
+                            frame_for_progress_bar.setVisibility(View.GONE);
+                            tvEmptyHistory.setText(R.string.not_found_history);
+
+                            flHistoryIsEmpty.setVisibility(View.VISIBLE);
+                        }else{
+                            wvHistory.loadDataWithBaseURL(null, sHTML, mime, encoding, null);
+                        }
+                    }
+                }
+
+            } while (cursor.moveToNext());
+
+            wvHistory.setVisibility(View.VISIBLE);
+            frame_for_progress_bar.setVisibility(View.GONE);
+        }else{
+            frame_for_progress_bar.setVisibility(View.GONE);
+            flHistoryIsEmpty.setVisibility(View.VISIBLE);
+        }
 
     }
 

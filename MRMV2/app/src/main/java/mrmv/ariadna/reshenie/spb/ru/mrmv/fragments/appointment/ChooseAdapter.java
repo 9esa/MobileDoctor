@@ -50,15 +50,11 @@ public class ChooseAdapter extends CursorAdapter {
         }
     }
 
-    /**
-     * Ёлементы дл€ каждой строки
-     */
     public static class MenuHolder {
 
         String sIdItem;
 
         TextView tvText;
-
 
     }
 

@@ -59,7 +59,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:paddingTop="15dp">
+                android:paddingTop="15dp"
+                android:layout_marginBottom="@dimen/margin_bottom_save">
 
                 <Button
                     android:layout_width="wrap_content"
@@ -69,7 +70,8 @@
                     android:paddingLeft="@dimen/padding_save_button"
                     android:id="@+id/button_save_visit"
                     android:background="@drawable/logout_btn_selector"
-                    android:textColor="#fffbfbfb" />
+                    android:textColor="#fffbfbfb"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>

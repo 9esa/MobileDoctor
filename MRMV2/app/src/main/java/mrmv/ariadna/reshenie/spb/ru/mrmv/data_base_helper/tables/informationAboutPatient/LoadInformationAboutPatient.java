@@ -1,13 +1,16 @@
 package mrmv.ariadna.reshenie.spb.ru.mrmv.data_base_helper.tables.informationAboutPatient;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteStatement;
+import android.preference.PreferenceManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import mrmv.ariadna.reshenie.spb.ru.mrmv.R;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.LoginAccount;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.load_infromation.AsyncLoadingInformation;
 import mrmv.ariadna.reshenie.spb.ru.mrmv.common_classes.load_infromation.ICallbackForLoadingMainInformation;
@@ -31,6 +34,8 @@ public class LoadInformationAboutPatient extends CommonMainLoading implements IC
 
     private ItemEmk oItemEmk;
 
+    private static int DEFAULT_VALUE_VIEW = 50;
+
     public LoadInformationAboutPatient(LoginAccount oLoginAccount, DataBaseHelper oDataBaseHelper, String sAddress, Context mContext) {
 
         this.oLoginAccount = oLoginAccount;
@@ -41,8 +46,18 @@ public class LoadInformationAboutPatient extends CommonMainLoading implements IC
 
     public void startLoadFoundPatients(ItemEmk oItemEmk, ICommonLoadComplete iLoadedCompleteCallBack) {
 
+        int iMaxValueToView = DEFAULT_VALUE_VIEW;
+
         this.iLoadedCompleteCallBack = iLoadedCompleteCallBack;
         this.oItemEmk = oItemEmk;
+
+
+        if(mContext != null){
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+            iMaxValueToView = Integer.valueOf(prefs.getString(mContext.getString(R.string.max_value_for_view_users), ""));
+
+        }
 
         String sValueAddressForRequest = "http://" + sAddress + "/doctor-web/api/patient/search?";
 
@@ -68,6 +83,20 @@ public class LoadInformationAboutPatient extends CommonMainLoading implements IC
                 sValueAddressForRequest += "&phone=" + oItemEmk.getiPhone();
             }
 
+            if(oItemEmk.getsDateBorn() != null){
+                sValueAddressForRequest += "&birthdate=" + oItemEmk.getsDateBorn();
+            }
+
+            if(oItemEmk.getsSerialPolice() != null){
+                sValueAddressForRequest += "&policyserial=" + oItemEmk.getsSerialPolice();
+            }
+
+            if(oItemEmk.getsNumberPolice() != null){
+                sValueAddressForRequest += "&policynumber=" + oItemEmk.getsNumberPolice();
+            }
+
+            sValueAddressForRequest += "&maxrows=" + iMaxValueToView;
+
         }
 
         AsyncLoadingInformation loadingInfromation = new AsyncLoadingInformation("", this, new Object());
@@ -75,7 +104,6 @@ public class LoadInformationAboutPatient extends CommonMainLoading implements IC
         loadingInfromation.setsRequest(sValueAddressForRequest);
         loadingInfromation.setDaemon(true);
         loadingInfromation.start();
-
 
     }
 
